@@ -3,6 +3,7 @@ Team members:
 
 Justin (intra: jdaly)
 Wolf (intra: whendrik)
+
 Objectives
 
 The goals of this project align with the broader objectives of the first year, emphasizing rigor, proficiency in C programming, application of fundamental algorithms, and adept information research techniques.
