@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
+/*   By: justindaly <justindaly@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:48:37 by whendrik          #+#    #+#             */
-/*   Updated: 2024/02/01 19:13:28 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/02/05 21:48:13 by justindaly       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <math.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <string.h>
+# include <errno.h>
 
 # define X_EVENT_KEY_PRESS	2
 # define X_EVENT_KEY_RELEASE	3
@@ -32,6 +34,9 @@
 # define KEY_W		13
 # define KEY_M		46
 # define PI	3.14159265358979
+
+# define SUCCESS 0
+# define FAILURE 1
 
 typedef	struct	s_map
 {
@@ -79,8 +84,15 @@ typedef struct	s_data
 	t_mlx	mlx;
 	t_img	img;
 	t_coor	avatar_pos;
+	t_map	mapinfo;
 	char **map;
 }		t_data;
+
+/*Error*/
+int	err_msg(char *content, char *err_msg, int exit_code);
+
+/*Parsing*/
+int	check_file(char *arg);
 
 /*Initialization*/
 void	init_data(t_data *data, char **map);
