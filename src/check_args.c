@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: justindaly <justindaly@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 16:45:10 by justindaly        #+#    #+#             */
-/*   Updated: 2024/02/02 17:21:57 by justindaly       ###   ########.fr       */
+/*   Updated: 2024/02/07 15:54:08 by jdaly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static	int	is_dir(char *arg)
 {
 	int		fd;
+
 	fd = open(arg, O_DIRECTORY); //O_DIRECTORY ensures it is a directory
 	if (fd >= 0)
 	{
@@ -29,7 +30,8 @@ static	int	is_cub_file(char *arg)
 	size_t	len;
 
 	len = ft_strlen(arg);
-	if ((arg[len - 3] != 'c' || arg[len - 2] != 'u' || arg[len - 1] != 'b' || arg[len - 4] != '.'))
+	if ((arg[len - 3] != 'c' || arg[len - 2] != 'u'
+			|| arg[len - 1] != 'b' || arg[len - 4] != '.'))
 		return (0);
 	return (1);
 }
