@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: justindaly <justindaly@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:48:37 by whendrik          #+#    #+#             */
-/*   Updated: 2024/02/05 21:48:13 by justindaly       ###   ########.fr       */
+/*   Updated: 2024/02/07 18:16:23 by jdaly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <stdio.h>
 # include <string.h>
 # include <errno.h>
+
+# define MAX_MAPSIZE 5000
 
 # define X_EVENT_KEY_PRESS	2
 # define X_EVENT_KEY_RELEASE	3
@@ -37,12 +39,26 @@
 
 # define SUCCESS 0
 # define FAILURE 1
+# define TRUE 1
+# define FALSE 0
 
-typedef	struct	s_map
+# define ERR_ARG 255
+# define ERR_FILE 254
+# define ERR_INFO 253
+# define ERR_SCENE 252
+# define ERR_WALL 251
+# define ERR_MAP 250
+
+typedef struct s_mapinfo
 {
+	char	*rawdata;
 	char	**map;
 	int		width;
 	int		height;
+	char	*no_path;
+	char	*so_path;
+	char	*we_path;
+	char	*ea_path;
 	char	*fl_color;
 	char	*ce_color;
 	int		f_color;
@@ -50,7 +66,11 @@ typedef	struct	s_map
 	int		p_start_x;
 	int		p_start_y;
 	char	p_start_o;
-}	t_map;
+	//grid
+	//flood
+	//closed
+	//str_first_line_map
+}	t_mapinfo;
 
 typedef struct s_img
 {
@@ -79,28 +99,30 @@ typedef struct s_coor
 	float	y;
 }		t_coor;
 
-typedef struct	s_data
+typedef struct s_data
 {
-	t_mlx	mlx;
-	t_img	img;
-	t_coor	avatar_pos;
-	t_map	mapinfo;
-	char **map;
+	t_mlx		mlx;
+	t_img		img;
+	t_coor		avatar_pos;
+	t_mapinfo	mapinfo;
+	char		**map;
 }		t_data;
 
 /*Error*/
-int	err_msg(char *content, char *err_msg, int exit_code);
+int		err_msg(char *content, char *err_msg, int exit_code);
 
 /*Parsing*/
-int	check_file(char *arg);
+void	init_mapinfo(t_mapinfo *info);
+int		check_file(char *arg);
+int		validate_map(int argc, char **argv, t_mapinfo *m_info);
 
 /*Initialization*/
 void	init_data(t_data *data, char **map);
 
 /*Draw Functions*/
 void	draw_grid(t_img *img, int width, int height);
-void	draw_grid_horizontal(t_img *img, int height);
-void	draw_grid_vertical(t_img *img, int width);
+// void	draw_grid_horizontal(t_img *img, int height);
+// void	draw_grid_vertical(t_img *img, int width);
 void	draw_avatar(t_data *data);
 int		draw_map(t_data	*data);
 
