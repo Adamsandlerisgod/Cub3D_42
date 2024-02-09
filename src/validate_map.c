@@ -6,7 +6,7 @@
 /*   By: justindaly <justindaly@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:03:33 by jdaly             #+#    #+#             */
-/*   Updated: 2024/02/09 17:02:59 by justindaly       ###   ########.fr       */
+/*   Updated: 2024/02/09 17:34:14 by justindaly       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,26 @@ int	is_valid_texture_type(char *mapdir)
 	return (0);
 }
 
+int	is_valid_texture_path(char type, char *path)
+{
+	int fd;
+
+	fd = open(path, O_RDONLY);
+	if (type == 'N' || type == 'S' || type == 'E' || type == 'W')
+	{
+		if (fd == -1)
+			return (err_msg(path, strerror(errno), FAILURE));
+		close(fd);
+	}
+	else if (type == 'F' || type == 'C')
+	{
+		//split colors
+		//check values
+	}
+	return (SUCCESS);
+
+}
+
 int	get_texture_info(t_mapinfo *mapinfo, char *line)
 {
 	char **texture_data;
@@ -98,6 +118,14 @@ int	get_texture_info(t_mapinfo *mapinfo, char *line)
 		free_array(texture_data);
 		return(err_msg(line, "invalid texture type", ERR_INFO));
 	}
+	//check if the texture paths are valid
+		//check type (NO/SO/EA/WE || C/F)
+			//if (N, S, E, W)
+				//check path
+			//if (C, F)
+				//deal with color codes
+	//check for duplicates
+	//set paths in mapinfo struct
 	(void)mapinfo;
 	free_array(texture_data);
 	return (0);
