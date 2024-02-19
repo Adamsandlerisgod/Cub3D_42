@@ -6,7 +6,7 @@
 /*   By: justindaly <justindaly@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:03:33 by jdaly             #+#    #+#             */
-/*   Updated: 2024/02/09 17:02:59 by justindaly       ###   ########.fr       */
+/*   Updated: 2024/02/19 16:47:56 by justindaly       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	ft_strcmp(const char *s1, const char *s2)
     return *(unsigned char *)s1 - *(unsigned char *)s2;
 }
 
+//check texture type & paths/color codes
 int	is_valid_texture_type(char *mapdir)
 {
 	const char	*valid_directions[] = {"NO", "SO", "EA", "WE", "C", "F"};
@@ -83,6 +84,91 @@ int	is_valid_texture_type(char *mapdir)
 	return (0);
 }
 
+//color codes
+int	is_valid_color_code(char *color)
+{
+	int	i;
+
+	i = 0;
+	while (color[i])
+	{
+		if (!ft_isdigit(color[i]))
+			return (0);
+		i++;
+	}
+	if (ft_atoi(color) > 255)
+		return (0);
+	return (1);
+}
+
+int	is_valid_texture_path(char type, char *path)
+{
+	int		fd;
+	int		i;
+	char	**color;
+
+	fd = open(path, O_RDONLY);
+	if (type == 'N' || type == 'S' || type == 'E' || type == 'W')
+	{
+		if (fd == -1)
+			return (err_msg(path, strerror(errno), FAILURE));
+		close(fd);
+	}
+	else if (type == 'F' || type == 'C')
+	{
+		color = ft_split(path, ','); //split colors
+		if (count_array_elements(color) != 3)	//check for 3 values
+		{	
+			free_array(color);
+			return (err_msg(path, "invalid floor/ceiling color info", FAILURE));
+		}
+		i = 0;
+		while (i < 3)
+		{
+			if (!is_valid_color_code(color[i]))
+			{
+				free_array(color);
+				return (err_msg(path, "invalid color code", FAILURE));
+			}
+			i++;
+		}
+		free_array(color);
+	}
+	else
+		return (FAILURE);
+	return (SUCCESS);
+}
+
+int	is_duplicate_type(t_mapinfo *info, char type)
+{
+	return ((type == 'N' && info->no_path) || 
+		(type == 'S' && info->so_path) ||
+		(type == 'W' && info->we_path) ||
+		(type == 'E' && info->ea_path) ||
+		(type == 'F' && info->fl_color) ||
+		(type == 'C' && info->ce_color));
+
+}
+
+//fill mapinfo struct
+int	fill_mapinfo_struct(t_mapinfo *info, char type, char *path)
+{
+	if (type == 'N')
+		info->no_path = ft_strdup(path);
+	else if (type == 'S')
+		info->so_path = ft_strdup(path);
+	else if (type == 'E')
+		info->ea_path = ft_strdup(path);
+	else if (type == 'W')
+		info->we_path = ft_strdup(path);
+	else if (type == 'F')
+		info->fl_color = ft_strdup(path);
+		//convert color to int;
+	else if (type == 'C')
+		info->ce_color = ft_strdup(path);
+	return (SUCCESS);
+}
+
 int	get_texture_info(t_mapinfo *mapinfo, char *line)
 {
 	char **texture_data;
@@ -91,16 +177,53 @@ int	get_texture_info(t_mapinfo *mapinfo, char *line)
 	if (count_array_elements(texture_data) != 2)
 	{
 		free_array(texture_data);
-		return(err_msg(line, "invalid texture line", ERR_INFO));
+		return (err_msg(line, "invalid texture line", ERR_INFO));
 	}
 	if (!is_valid_texture_type(texture_data[0]))
 	{
 		free_array(texture_data);
-		return(err_msg(line, "invalid texture type", ERR_INFO));
+		return (err_msg(line, "invalid texture type", ERR_INFO));
 	}
-	(void)mapinfo;
+	if (!is_valid_texture_path(texture_data[0][0], texture_data[1])) //check if the texture paths are valid
+	{
+		free_array(texture_data);
+		return (ERR_INFO);
+	}
+	if (is_duplicate_type(mapinfo, texture_data[0][0])) //check for duplicates
+	{
+		free_array(texture_data);
+		return (err_msg(line, "duplicate type", ERR_INFO));
+	}
+	fill_mapinfo_struct(mapinfo, texture_data[0][0], texture_data[1]);//set paths in mapinfo struct
 	free_array(texture_data);
 	return (0);
+}
+
+void	create_map_array(t_mapinfo *info, char **lines, int i)
+{
+	int		bgn;
+	int		map_length;
+	char	**map;
+	int		j;
+
+	bgn = i;
+	map_length = 0;
+	while (lines[i])
+	{
+		map_length++;
+		i++;
+	}
+	i = bgn;
+	map = malloc(sizeof(char *) * (map_length + 1));
+	j = 0;
+	while (j < map_length)
+	{
+		map[j] = ft_strdup(lines[i]);
+		i++;
+		j++;
+	}
+	map[j] = NULL;
+	info->map = map;
 }
 
 int	check_texture_info(t_mapinfo *m_info)
@@ -112,15 +235,18 @@ int	check_texture_info(t_mapinfo *m_info)
 	i = 0;
 	while (lines[i])
 	{
-		//check texture data
-		if (get_texture_info(m_info, lines[i]) == ERR_INFO)
+		if (get_texture_info(m_info, lines[i]) == ERR_INFO) 		//check texture data
 			return (free_array(lines), ERR_INFO);
 		i++;
-		//break if all textures (NO, SO, EA, WE, C, F) found
+		if (m_info->no_path && m_info->so_path && m_info->ea_path && m_info->we_path && m_info->ce_color && m_info->fl_color) //break if all textures (NO, SO, EA, WE, C, F) found
+		{
+			printf("breaaaaaak!\n");
+			break;
+		}
 	}
-	// check if there is more data after texture info
-		//set first line of map
-	//create 2D MAP ARRAY
+	if (lines[i]) // check if there is more data after texture info
+		m_info->map_bgn = ft_strdup(lines[i]);//set first line of map
+	create_map_array(m_info, lines, i); //create 2D MAP ARRAY
 	free_array(lines);
 	return (0);
 }
