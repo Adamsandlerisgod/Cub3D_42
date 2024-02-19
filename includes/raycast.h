@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
+/*   By: justindaly <justindaly@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:48:37 by whendrik          #+#    #+#             */
-/*   Updated: 2024/02/07 18:16:23 by jdaly            ###   ########.fr       */
+/*   Updated: 2024/02/19 15:47:42 by justindaly       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_mapinfo
 	//grid
 	//flood
 	//closed
-	//str_first_line_map
+	char	*map_bgn;
 }	t_mapinfo;
 
 typedef struct s_img
