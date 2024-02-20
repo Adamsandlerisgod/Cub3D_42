@@ -6,7 +6,7 @@
 /*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:29:23 by whendrik          #+#    #+#             */
-/*   Updated: 2024/02/01 17:01:43 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/02/03 18:44:37 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ int		draw_map(t_data	*data)
 		while (map[x][y] != '\0')
 		{
 			printf("coor map = (%d, %d) = %c\n", y , x, map[y][x]);
-			if (map[y][x] == '1')
-				fill_square(&data->img, data->img.width/mapX - 5,
-					data->img.height/mapY - 5, 0x00FF0000, y, x);
-			else if (map[y][x] == '0')
-				fill_square(&data->img, data->img.width/mapX - 5,
-					data->img.height/mapY - 5, 0x0000FF, y, x);
+			if (map[x][y] == '1')
+				fill_square(&data->img, data->img.width/mapX,
+					data->img.height/mapY, 0x00FF0000, y, x);
+			else
+				fill_square(&data->img, data->img.width/mapX,
+					data->img.height/mapY, 0x0000FF, y, x);
 			y++;
 		}
 		x++;	
