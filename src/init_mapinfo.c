@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mapinfo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
+/*   By: justindaly <justindaly@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:20:00 by jdaly             #+#    #+#             */
-/*   Updated: 2024/02/07 18:28:19 by jdaly            ###   ########.fr       */
+/*   Updated: 2024/02/21 19:58:51 by justindaly       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	init_mapinfo(t_mapinfo *info)
 {
 	info->rawdata = NULL;
 	info->map = NULL;
+	info->map_bgn = NULL;
 	info->width = 0;
 	info->height = 0;
 	info->no_path = NULL;
@@ -33,9 +34,12 @@ void	init_mapinfo(t_mapinfo *info)
 
 void	free_mapinfo(t_mapinfo	*info)
 {
-	//free map array info->map
 	if (info->rawdata != NULL)
 		free(info->rawdata);
+	// if (info->map != NULL)
+	// 	//free_array(info->map);
+	if (info->map_bgn != NULL)
+		free(info->map_bgn);
 	if (info->no_path != NULL)
 		free(info->no_path);
 	if (info->so_path != NULL)
@@ -48,5 +52,6 @@ void	free_mapinfo(t_mapinfo	*info)
 		free(info->fl_color);
 	if (info->ce_color != NULL)
 		free(info->ce_color);
+	
 	//free additional elements?
 }
