@@ -6,7 +6,7 @@
 /*   By: justindaly <justindaly@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:48:37 by whendrik          #+#    #+#             */
-/*   Updated: 2024/02/19 15:47:42 by justindaly       ###   ########.fr       */
+/*   Updated: 2024/02/21 19:59:39 by justindaly       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,11 +110,18 @@ typedef struct s_data
 
 /*Error*/
 int		err_msg(char *content, char *err_msg, int exit_code);
+void	print_mapinfo(t_mapinfo *mapinfo);
+
+/*Validate CUB*/
+void	free_array(char **array);
+
+/*Init Map Info*/
+void	free_mapinfo(t_mapinfo	*info);
 
 /*Parsing*/
 void	init_mapinfo(t_mapinfo *info);
 int		check_file(char *arg);
-int		validate_map(int argc, char **argv, t_mapinfo *m_info);
+int		validate_cub(int argc, char **argv, t_mapinfo *m_info);
 
 /*Initialization*/
 void	init_data(t_data *data, char **map);
