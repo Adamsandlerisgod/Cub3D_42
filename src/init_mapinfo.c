@@ -6,7 +6,7 @@
 /*   By: justindaly <justindaly@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:20:00 by jdaly             #+#    #+#             */
-/*   Updated: 2024/02/21 19:58:51 by justindaly       ###   ########.fr       */
+/*   Updated: 2024/02/21 20:44:23 by justindaly       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	init_mapinfo(t_mapinfo *info)
 	info->rawdata = NULL;
 	info->map = NULL;
 	info->map_bgn = NULL;
+	info->grid = NULL;
 	info->width = 0;
 	info->height = 0;
 	info->no_path = NULL;
@@ -36,8 +37,10 @@ void	free_mapinfo(t_mapinfo	*info)
 {
 	if (info->rawdata != NULL)
 		free(info->rawdata);
-	// if (info->map != NULL)
-	// 	//free_array(info->map);
+	if (info->map != NULL)
+		free_array(info->map);
+	if (info->grid != NULL)
+		free_array(info->grid);
 	if (info->map_bgn != NULL)
 		free(info->map_bgn);
 	if (info->no_path != NULL)

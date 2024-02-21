@@ -6,7 +6,7 @@
 /*   By: justindaly <justindaly@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:03:33 by jdaly             #+#    #+#             */
-/*   Updated: 2024/02/21 19:31:23 by justindaly       ###   ########.fr       */
+/*   Updated: 2024/02/21 21:16:38 by justindaly       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,11 +270,14 @@ int	validate_cub(int argc, char **argv, t_mapinfo *m_info)
 	if (!m_info->rawdata)
 		return (ERR_FILE);
 	printf("mapinfo->raw:\n%s\n-------------------\n", m_info->rawdata);
-	//check 2: extract texture info, check all info is there
-	if (check_texture_info(m_info) == ERR_INFO)
+	if (check_texture_info(m_info) == ERR_INFO) //check 2: extract texture info, check all info is there
 		return (free_mapinfo(m_info), ERR_INFO);
+	init_grid(m_info); //initialize grid standardizing width
+	if (check_grid(m_info) == ERR_GRID) //check map chars and player start
+		return (free_mapinfo(m_info), ERR_GRID);
+	// if (check_walls(m_info) == ERR_WALL) //flood fill to make sure walls are closed
+	// 	return (free_mapinfo(m_info), ERR_WALL);
 	print_mapinfo(m_info);
-	//validate map
-	
+	free_mapinfo(m_info);
 	return (0);
 }
