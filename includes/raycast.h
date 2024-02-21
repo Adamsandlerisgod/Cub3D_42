@@ -6,7 +6,7 @@
 /*   By: justindaly <justindaly@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:48:37 by whendrik          #+#    #+#             */
-/*   Updated: 2024/02/21 19:59:39 by justindaly       ###   ########.fr       */
+/*   Updated: 2024/02/21 21:04:06 by justindaly       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 # define ERR_ARG 255
 # define ERR_FILE 254
 # define ERR_INFO 253
-# define ERR_SCENE 252
+# define ERR_GRID 252
 # define ERR_WALL 251
 # define ERR_MAP 250
 
@@ -53,6 +53,7 @@ typedef struct s_mapinfo
 {
 	char	*rawdata;
 	char	**map;
+	char	**grid;
 	int		width;
 	int		height;
 	char	*no_path;
@@ -66,7 +67,6 @@ typedef struct s_mapinfo
 	int		p_start_x;
 	int		p_start_y;
 	char	p_start_o;
-	//grid
 	//flood
 	//closed
 	char	*map_bgn;
@@ -122,6 +122,9 @@ void	free_mapinfo(t_mapinfo	*info);
 void	init_mapinfo(t_mapinfo *info);
 int		check_file(char *arg);
 int		validate_cub(int argc, char **argv, t_mapinfo *m_info);
+void	init_grid(t_mapinfo *mapinfo);
+int		check_grid(t_mapinfo *mapinfo);
+
 
 /*Initialization*/
 void	init_data(t_data *data, char **map);

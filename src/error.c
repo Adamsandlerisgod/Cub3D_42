@@ -6,7 +6,7 @@
 /*   By: justindaly <justindaly@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:02:38 by justindaly        #+#    #+#             */
-/*   Updated: 2024/02/21 19:35:09 by justindaly       ###   ########.fr       */
+/*   Updated: 2024/02/21 20:47:20 by justindaly       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,6 @@ void	print_mapinfo(t_mapinfo *mapinfo)
 	printf("str_first_line_map: %s\n", mapinfo->map_bgn);
 	printf("=== map ===\n");
 	print_array(mapinfo->map);
+	printf("=== grid ===\n");
+	print_array(mapinfo->grid);
 }

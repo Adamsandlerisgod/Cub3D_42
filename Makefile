@@ -6,7 +6,7 @@
 #    By: justindaly <justindaly@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/30 16:08:21 by whendrik          #+#    #+#              #
-#    Updated: 2024/02/21 20:00:29 by justindaly       ###   ########.fr        #
+#    Updated: 2024/02/21 21:04:47 by justindaly       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ NAME = Cub3D
 LIBFT = libft/libft.a
 MLX = mlx/libmlx.a
 SRC_DIR = src
-SRC_FILES= main.c draw_map.c init_data.c check_args.c error.c init_mapinfo.c validate_cubfile.c main_justin.c
+SRC_FILES= main.c draw_map.c init_data.c check_args.c error.c init_mapinfo.c validate_cubfile.c main_justin.c init_grid.c check_grid.c
 
 OBJ_DIR = obj
 INC_DIR = includes
