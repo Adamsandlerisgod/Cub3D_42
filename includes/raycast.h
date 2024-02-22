@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: justindaly <justindaly@student.42.fr>      +#+  +:+       +#+        */
+/*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:48:37 by whendrik          #+#    #+#             */
-/*   Updated: 2024/02/19 15:47:42 by justindaly       ###   ########.fr       */
+/*   Updated: 2024/02/22 14:16:40 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,20 @@ typedef struct s_coor
 	float	y;
 }		t_coor;
 
+typedef struct s_coor_db
+{
+	double	x;
+	double	y;
+}		t_coor_db;
+
 typedef struct s_data
 {
 	t_mlx		mlx;
 	t_img		img;
 	t_coor		avatar_pos;
+	// t_coor		dir;
 	t_mapinfo	mapinfo;
+	t_coor_db	dir;
 	char		**map;
 }		t_data;
 
