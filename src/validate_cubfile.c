@@ -6,7 +6,7 @@
 /*   By: justindaly <justindaly@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:03:33 by jdaly             #+#    #+#             */
-/*   Updated: 2024/02/21 21:56:24 by justindaly       ###   ########.fr       */
+/*   Updated: 2024/02/23 14:23:25 by justindaly       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,7 +243,7 @@ int	check_texture_info(t_mapinfo *m_info)
 		if (get_texture_info(m_info, lines[i]) == ERR_INFO) 		//check texture data
 			return (free_array(lines), ERR_INFO);
 		i++;
-		if (m_info->no_path && m_info->so_path && m_info->ea_path && m_info->we_path && m_info->ce_color && m_info->fl_color) //break if all textures (NO, SO, EA, WE, C, F) found
+		if (m_info->no_path && m_info->so_path && m_info->ea_path && m_info->we_path && m_info->c_color_str && m_info->f_color_str) //break if all textures (NO, SO, EA, WE, C, F) found
 		{
 			printf("all texture info found!\n");
 			break;
