@@ -6,7 +6,7 @@
 /*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:03:33 by jdaly             #+#    #+#             */
-/*   Updated: 2024/02/23 19:29:08 by jdaly            ###   ########.fr       */
+/*   Updated: 2024/02/23 20:13:59 by jdaly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,18 @@ void	free_array(char **array)
 	array = NULL;
 }
 
-int	ft_strcmp(const char *s1, const char *s2)
+int	check_double_nl(t_mapinfo *mapinfo)
 {
-	while (*s1 && (*s1 == *s2))
-	{
-		s1++;
-		s2++;
-	}
-	return (*(unsigned char *)s1 - *(unsigned char *)s2);
+	char *map_key;
+	char *map_bgn;
+	char *result;
+
+	map_key = mapinfo->map_bgn;
+	map_bgn = ft_strnstr(mapinfo->rawdata, map_key, MAX_MAPSIZE);
+	result = ft_strnstr(map_bgn, "\n\n", MAX_MAPSIZE);
+	if (result != NULL)
+		return (err_msg(NULL, "map has empty line", ERR_MAP));
+	return (SUCCESS);
 }
 
 int	validate_cub(int argc, char **argv, t_mapinfo *m_info)
@@ -91,6 +95,8 @@ int	validate_cub(int argc, char **argv, t_mapinfo *m_info)
 		return (free_mapinfo(m_info), ERR_GRID);
 	if (check_walls(m_info) == ERR_WALL) //flood fill to make sure walls are closed
 		return (free_mapinfo(m_info), ERR_WALL);
+	if (check_double_nl(m_info) == ERR_MAP)
+		return (free_mapinfo(m_info), ERR_MAP);
 	print_mapinfo(m_info);
 	free_mapinfo(m_info);
 	return (SUCCESS);
