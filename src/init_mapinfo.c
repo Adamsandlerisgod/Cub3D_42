@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mapinfo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: justindaly <justindaly@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:20:00 by jdaly             #+#    #+#             */
-/*   Updated: 2024/02/23 14:20:00 by justindaly       ###   ########.fr       */
+/*   Updated: 2024/02/23 14:38:49 by jdaly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,5 @@ void	free_mapinfo(t_mapinfo	*info)
 		free(info->f_color_str);
 	if (info->c_color_str != NULL)
 		free(info->c_color_str);
-	
 	//free additional elements?
 }

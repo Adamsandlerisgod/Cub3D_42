@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: justindaly <justindaly@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:02:38 by justindaly        #+#    #+#             */
-/*   Updated: 2024/02/21 20:47:20 by justindaly       ###   ########.fr       */
+/*   Updated: 2024/02/23 14:38:24 by jdaly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	print_mapinfo(t_mapinfo *mapinfo)
 	printf("so_path: %s\n", mapinfo->so_path);
 	printf("we_path: %s\n", mapinfo->we_path);
 	printf("ea_path: %s\n", mapinfo->ea_path);
-	printf("fl_color: %s\n", mapinfo->fl_color);
-	printf("ce_color: %s\n", mapinfo->ce_color);
+	printf("f_color_str: %s\n", mapinfo->f_color_str);
+	printf("c_color_str: %s\n", mapinfo->c_color_str);
 	//printf("f_color (rgb): %d (%u,%u,%u)\n", mapinfo->f_color,
 		//get_r(mapinfo->f_color), get_g(mapinfo->f_color), get_b(mapinfo->f_color));
 	//printf("c_color (rgb): %d (%u,%u,%u)\n", mapinfo->c_color,
