@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_grid.c                                       :+:      :+:    :+:   */
+/*   ps_check_grid.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: justindaly <justindaly@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 20:57:19 by justindaly        #+#    #+#             */
-/*   Updated: 2024/02/21 21:30:51 by justindaly       ###   ########.fr       */
+/*   Updated: 2024/02/23 19:26:46 by jdaly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,38 +25,36 @@ int	is_player_start(char c)
 
 int	is_valid_player_pos(t_mapinfo *mapinfo)
 {
-	return ((mapinfo->p_start_x > 0 && mapinfo->p_start_x < (mapinfo->width - 1)) && \
-			mapinfo->p_start_y > 0 && mapinfo->p_start_y < (mapinfo->height - 1));
+	return ((mapinfo->p_start_x > 0 && mapinfo->p_start_x < \
+			(mapinfo->width - 1)) && mapinfo->p_start_y > 0 \
+			&& mapinfo->p_start_y < (mapinfo->height - 1));
 }
 
-int	check_grid(t_mapinfo *mapinfo)
+int	check_grid(t_mapinfo *info)
 {
 	int	i;
 	int	j;
 
 	i = -1;
-	while (++i < mapinfo->height)
+	while (++i < info->height)
 	{
-		j = 0;
-		while (j < mapinfo->width)
+		j = -1;
+		while (++j < info->width)
 		{
-			if (!is_valid_map_char(mapinfo->grid[i][j]))
+			if (!is_valid_map_char(info->grid[i][j]))
+				return (err_msg(info->grid[i], "invalid map char", ERR_GRID));
+			else if (is_player_start(info->grid[i][j]))
 			{
-				return (err_msg(mapinfo->grid[i], "invalid map character", ERR_GRID));
+				printf("players start = %c\n", info->grid[i][j]);
+				if (info->p_start_o != '-')
+					return (err_msg(NULL, "dup player start pos", ERR_GRID));
+				info->p_start_x = j;
+				info->p_start_y = i;
+				info->p_start_o = info->grid[i][j];
 			}
-			else if (is_player_start(mapinfo->grid[i][j]))
-			{
-				printf("players start = %c\n", mapinfo->grid[i][j]);
-				if (mapinfo->p_start_o != '-')
-					return (err_msg(NULL, "duplicate player start position", ERR_GRID));
-				mapinfo->p_start_x = j;
-				mapinfo->p_start_y = i;
-				mapinfo->p_start_o = mapinfo->grid[i][j];
-			}
-			j++;
 		}
 	}
-	if (!is_valid_player_pos(mapinfo))
+	if (!is_valid_player_pos(info))
 		return (err_msg(NULL, "invalid player position", ERR_GRID));
 	return (SUCCESS);
 }

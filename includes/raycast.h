@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: justindaly <justindaly@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:48:37 by whendrik          #+#    #+#             */
-/*   Updated: 2024/02/23 14:19:23 by justindaly       ###   ########.fr       */
+/*   Updated: 2024/02/23 19:15:30 by jdaly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,11 @@
 typedef struct s_mapinfo
 {
 	char	*rawdata;
+	char	*map_bgn;
 	char	**map;
 	char	**grid;
+	char	**flood;
+	int		closed;
 	int		width;
 	int		height;
 	char	*no_path;
@@ -67,9 +70,6 @@ typedef struct s_mapinfo
 	int		p_start_x;
 	int		p_start_y;
 	char	p_start_o;
-	//flood
-	//closed
-	char	*map_bgn;
 }	t_mapinfo;
 
 typedef struct s_img
@@ -82,7 +82,6 @@ typedef struct s_img
 	int		width;
 	int		height;
 }		t_img;
-
 
 typedef struct s_mlx
 {
@@ -108,23 +107,32 @@ typedef struct s_data
 	char		**map;
 }		t_data;
 
+/********PARSING*********/
 /*Error*/
 int		err_msg(char *content, char *err_msg, int exit_code);
+void	print_array(char **array);
 void	print_mapinfo(t_mapinfo *mapinfo);
 
 /*Validate CUB*/
+int		count_array_elements(char **array);
 void	free_array(char **array);
+int		validate_cub(int argc, char **argv, t_mapinfo *m_info);
 
 /*Init Map Info*/
-void	free_mapinfo(t_mapinfo	*info);
-
-/*Parsing*/
 void	init_mapinfo(t_mapinfo *info);
+void	free_mapinfo(t_mapinfo *info);
+
+/*Texture Utils*/
+int		is_valid_texture_type(char *mapdir);
+int		is_valid_color_code(char *color);
+int		is_valid_texture_path(char type, char *path);
+int		is_duplicate_type(t_mapinfo *info, char type);
+
+/*Parsing Checks*/
 int		check_file(char *arg);
-int		validate_cub(int argc, char **argv, t_mapinfo *m_info);
 void	init_grid(t_mapinfo *mapinfo);
 int		check_grid(t_mapinfo *mapinfo);
-
+int		check_walls(t_mapinfo *mapinfo);
 
 /*Initialization*/
 void	init_data(t_data *data, char **map);
