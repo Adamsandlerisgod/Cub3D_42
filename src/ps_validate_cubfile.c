@@ -6,7 +6,7 @@
 /*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:03:33 by jdaly             #+#    #+#             */
-/*   Updated: 2024/02/23 18:50:36 by jdaly            ###   ########.fr       */
+/*   Updated: 2024/02/23 19:29:08 by jdaly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,5 @@ int	validate_cub(int argc, char **argv, t_mapinfo *m_info)
 		return (free_mapinfo(m_info), ERR_WALL);
 	print_mapinfo(m_info);
 	free_mapinfo(m_info);
-	return (0);
+	return (SUCCESS);
 }

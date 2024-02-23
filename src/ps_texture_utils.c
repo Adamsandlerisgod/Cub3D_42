@@ -6,7 +6,7 @@
 /*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:51:55 by jdaly             #+#    #+#             */
-/*   Updated: 2024/02/23 18:54:07 by jdaly            ###   ########.fr       */
+/*   Updated: 2024/02/23 19:28:56 by jdaly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,19 +69,13 @@ int	is_valid_texture_path(char type, char *path)
 	else if (type == 'F' || type == 'C')
 	{
 		color = ft_split(path, ','); //split colors
-		if (count_array_elements(color) != 3)	//check for 3 values
-		{
-			free_array(color);
-			return (err_msg(path, "invalid floor/ceiling color info", FAILURE));
-		}
+		if (count_array_elements(color) != 3) //check for 3 values
+			return (free_array(color), err_msg(path, "invalid f/c color info", FAILURE));
 		i = 0;
 		while (i < 3)
 		{
 			if (!is_valid_color_code(color[i]))
-			{
-				free_array(color);
-				return (err_msg(path, "invalid color code", FAILURE));
-			}
+				return (free_array(color), err_msg(path, "invalid color code", FAILURE));
 			i++;
 		}
 		free_array(color);
