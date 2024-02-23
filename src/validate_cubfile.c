@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_cubfile.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: justindaly <justindaly@student.42.fr>      +#+  +:+       +#+        */
+/*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:03:33 by jdaly             #+#    #+#             */
-/*   Updated: 2024/02/23 14:23:25 by justindaly       ###   ########.fr       */
+/*   Updated: 2024/02/23 15:24:31 by jdaly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 //check 1
 char	*get_raw(char *file)
 {
-	int 	fd;
+	int		fd;
 	int		bytes;
 	char	*result;
 
@@ -57,17 +57,17 @@ void	free_array(char **array)
 		i++;
 	}
 	free(array);
-	//array = NULL;
+	array = NULL;
 }
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
 	while (*s1 && (*s1 == *s2))
 	{
-        s1++;
-        s2++;
-    }
-    return *(unsigned char *)s1 - *(unsigned char *)s2;
+		s1++;
+		s2++;
+	}
+	return (*(unsigned char *)s1 - *(unsigned char *)s2);
 }
 
 //check texture type & paths/color codes
@@ -120,7 +120,7 @@ int	is_valid_texture_path(char type, char *path)
 	{
 		color = ft_split(path, ','); //split colors
 		if (count_array_elements(color) != 3)	//check for 3 values
-		{	
+		{
 			free_array(color);
 			return (err_msg(path, "invalid floor/ceiling color info", FAILURE));
 		}
@@ -143,12 +143,12 @@ int	is_valid_texture_path(char type, char *path)
 
 int	is_duplicate_type(t_mapinfo *info, char type)
 {
-	return ((type == 'N' && info->no_path) || 
-		(type == 'S' && info->so_path) ||
-		(type == 'W' && info->we_path) ||
-		(type == 'E' && info->ea_path) ||
-		(type == 'F' && info->f_color_str) ||
-		(type == 'C' && info->c_color_str));
+	return ((type == 'N' && info->no_path)
+		|| (type == 'S' && info->so_path)
+		|| (type == 'W' && info->we_path)
+		|| (type == 'E' && info->ea_path)
+		|| (type == 'F' && info->f_color_str)
+		|| (type == 'C' && info->c_color_str));
 
 }
 
@@ -174,7 +174,7 @@ int	fill_mapinfo_struct(t_mapinfo *info, char type, char *path)
 
 int	get_texture_info(t_mapinfo *mapinfo, char *line)
 {
-	char **texture_data;
+	char	**texture_data;
 
 	texture_data = ft_split(line, ' ');
 	if (count_array_elements(texture_data) != 2)
@@ -246,11 +246,13 @@ int	check_texture_info(t_mapinfo *m_info)
 		if (m_info->no_path && m_info->so_path && m_info->ea_path && m_info->we_path && m_info->c_color_str && m_info->f_color_str) //break if all textures (NO, SO, EA, WE, C, F) found
 		{
 			printf("all texture info found!\n");
-			break;
+			break ;
 		}
 	}
-	if (lines[i] != NULL) // check if there is more data after texture info
-		m_info->map_bgn = ft_strdup(lines[i]);//set first line of map
+	if (lines[i] == NULL)
+		return (free_array(lines), err_msg(NULL, "no map in file", ERR_INFO));
+	else if (lines[i] != NULL) // check if there is more data after texture info
+		m_info->map_bgn = ft_strdup(lines[i]); //set first line of map
 	create_map_array(m_info, lines, i); //create 2D MAP ARRAY
 	free_array(lines);
 	return (0);
