@@ -6,11 +6,21 @@
 /*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:51:55 by jdaly             #+#    #+#             */
-/*   Updated: 2024/02/23 19:28:56 by jdaly            ###   ########.fr       */
+/*   Updated: 2024/02/23 20:14:09 by jdaly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/raycast.h"
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	while (*s1 && (*s1 == *s2))
+	{
+		s1++;
+		s2++;
+	}
+	return (*(unsigned char *)s1 - *(unsigned char *)s2);
+}
 
 //check texture type & paths/color codes
 int	is_valid_texture_type(char *mapdir)
