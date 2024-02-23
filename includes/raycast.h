@@ -6,7 +6,7 @@
 /*   By: justindaly <justindaly@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:48:37 by whendrik          #+#    #+#             */
-/*   Updated: 2024/02/21 21:04:06 by justindaly       ###   ########.fr       */
+/*   Updated: 2024/02/23 14:19:23 by justindaly       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ typedef struct s_mapinfo
 	char	*so_path;
 	char	*we_path;
 	char	*ea_path;
-	char	*fl_color;
-	char	*ce_color;
-	int		f_color;
-	int		c_color;
+	char	*f_color_str;
+	char	*c_color_str;
+	int		f_color_int;
+	int		c_color_int;
 	int		p_start_x;
 	int		p_start_y;
 	char	p_start_o;

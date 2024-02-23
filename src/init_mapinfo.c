@@ -6,7 +6,7 @@
 /*   By: justindaly <justindaly@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 16:20:00 by jdaly             #+#    #+#             */
-/*   Updated: 2024/02/21 20:44:23 by justindaly       ###   ########.fr       */
+/*   Updated: 2024/02/23 14:20:00 by justindaly       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	init_mapinfo(t_mapinfo *info)
 	info->so_path = NULL;
 	info->we_path = NULL;
 	info->ea_path = NULL;
-	info->fl_color = NULL;
-	info->ce_color = NULL;
-	info->f_color = 0;
-	info->c_color = 0;
+	info->f_color_str = NULL;
+	info->c_color_str = NULL;
+	info->f_color_int = 0;
+	info->c_color_int = 0;
 	info->p_start_o = '-';
 	info->p_start_x = 0;
 	info->p_start_y = 0;
@@ -51,10 +51,10 @@ void	free_mapinfo(t_mapinfo	*info)
 		free(info->we_path);
 	if (info->ea_path != NULL)
 		free(info->ea_path);
-	if (info->fl_color != NULL)
-		free(info->fl_color);
-	if (info->ce_color != NULL)
-		free(info->ce_color);
+	if (info->f_color_str != NULL)
+		free(info->f_color_str);
+	if (info->c_color_str != NULL)
+		free(info->c_color_str);
 	
 	//free additional elements?
 }
