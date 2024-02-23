@@ -6,7 +6,7 @@
 /*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:48:37 by whendrik          #+#    #+#             */
-/*   Updated: 2024/02/23 19:15:30 by jdaly            ###   ########.fr       */
+/*   Updated: 2024/02/23 20:15:31 by jdaly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ int		is_duplicate_type(t_mapinfo *info, char type);
 
 /*Parsing Checks*/
 int		check_file(char *arg);
+int		check_texture_info(t_mapinfo *m_info);
 void	init_grid(t_mapinfo *mapinfo);
 int		check_grid(t_mapinfo *mapinfo);
 int		check_walls(t_mapinfo *mapinfo);
