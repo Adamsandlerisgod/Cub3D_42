@@ -6,7 +6,7 @@
 /*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:03:33 by jdaly             #+#    #+#             */
-/*   Updated: 2024/02/23 15:24:31 by jdaly            ###   ########.fr       */
+/*   Updated: 2024/02/23 17:26:36 by jdaly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,8 +277,8 @@ int	validate_cub(int argc, char **argv, t_mapinfo *m_info)
 	init_grid(m_info); //initialize grid standardizing width
 	if (check_grid(m_info) == ERR_GRID) //check map chars and player start
 		return (free_mapinfo(m_info), ERR_GRID);
-	// if (check_walls(m_info) == ERR_WALL) //flood fill to make sure walls are closed
-	// 	return (free_mapinfo(m_info), ERR_WALL);
+	if (check_walls(m_info) == ERR_WALL) //flood fill to make sure walls are closed
+		return (free_mapinfo(m_info), ERR_WALL);
 	print_mapinfo(m_info);
 	free_mapinfo(m_info);
 	return (0);

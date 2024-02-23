@@ -6,7 +6,7 @@
 /*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:02:38 by justindaly        #+#    #+#             */
-/*   Updated: 2024/02/23 14:38:24 by jdaly            ###   ########.fr       */
+/*   Updated: 2024/02/23 17:14:14 by jdaly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,6 @@ void	print_mapinfo(t_mapinfo *mapinfo)
 	print_array(mapinfo->map);
 	printf("=== grid ===\n");
 	print_array(mapinfo->grid);
+	printf("=== flood ===\n");
+	print_array(mapinfo->flood);
 }
