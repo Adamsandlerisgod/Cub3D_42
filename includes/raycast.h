@@ -6,7 +6,7 @@
 /*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:48:37 by whendrik          #+#    #+#             */
-/*   Updated: 2024/02/23 17:20:24 by jdaly            ###   ########.fr       */
+/*   Updated: 2024/02/23 17:45:10 by jdaly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void	print_mapinfo(t_mapinfo *mapinfo);
 
 /*Validate CUB*/
 void	free_array(char **array);
+void	print_array(char **array);
 int		count_array_elements(char **array);
 
 
