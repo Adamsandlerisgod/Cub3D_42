@@ -6,7 +6,7 @@
 /*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:48:37 by whendrik          #+#    #+#             */
-/*   Updated: 2024/02/22 14:16:40 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/02/24 12:43:46 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@
 # define KEY_W		13
 # define KEY_M		46
 # define PI	3.14159265358979
+
+# define HEIGHT 768
+# define WIDTH 1024
+/*Half (FOV) angle*/
+# define FOV 0.4235987756
+
+/* movement speed */
+# define SPEED 0.05
 
 # define SUCCESS 0
 # define FAILURE 1
@@ -105,15 +113,31 @@ typedef struct s_coor_db
 	double	y;
 }		t_coor_db;
 
+typedef struct s_ray
+{
+	double		step_angle;
+	t_coor		avatar_pos;
+	t_coor_db	dir;
+	float		dir_angle;
+	t_coor_db	dist_to_side;
+	t_coor		step;
+	t_coor_db	delta;
+	t_coor		map;
+	bool		hit_side;
+	double		perp_dist;
+	int			wall_height;
+	int			wall_hit_x;
+}		t_ray;
 typedef struct s_data
 {
 	t_mlx		mlx;
 	t_img		img;
 	t_coor		avatar_pos;
-	// t_coor		dir;
 	t_mapinfo	mapinfo;
-	t_coor_db	dir;
+	double		facing_angle;
+	// t_coor_db	dir;
 	char		**map;
+	t_ray		raycast;
 }		t_data;
 
 /*Error*/

@@ -1,0 +1,95 @@
+1. 
+create t_rays:
+typedef struct s_rays
+{
+	double		step_ang;
+	t_cor_db	dir;
+	t_cor_db	side_dist;
+	t_cor_int	step;
+	t_cor_db	delta;
+	t_cor_int	map;
+	bool		side_hit;
+	double		perp_dist;
+	int			wall_h;
+	int			wall_hit_x;
+	t_draw		wall;
+}	t_rays;
+
+2. Memset to Null
+3. Calculate step_angle = FOV * 2/WIDTH
+4. Use while loop to cast rays for the entirety of WIDTH(of program[not map])
+
+5. Raycast function:
+6. // Calculate the angle of the current ray
+    ray_angle = data->face_ang - FOV + x * rays->step_ang;
+
+    // Calculate the direction vector of the ray
+    rays->dir.x = -1 * cos(ray_angle);
+    rays->dir.y = -1 * sin(ray_angle);
+7. Initialize the rest of the raycast struct e.g.
+ a. Coordinates of the ray at start is where the hero starts(x,y)
+ b. 1 / rays->dir.x and 1 / rays->dir.y give the reciprocal of the x and y
+  components of the ray direction. This reciprocal represents the distance 
+  the ray needs to travel along the respective axis to reach the next grid line.
+Delta Calculation:
+The reciprocal is taken because if the x or y component of the ray direction
+ is 2, for example, it means the ray moves 2 units for every 1 unit on the grid.
+  So, to find the distance needed to traverse 1 unit on the grid, 
+  we take the reciprocal (1/2 in this example).
+
+ c. Initialize the direction that well be heading e.g.
+	if (rays->dir.x < 0)
+	{
+		rays->step.x = -1;
+		rays->side_dist.x = (data->hero.x - rays->map.x) * rays->delta.x;
+	}
+	data->hero.x - rays->map.x * rays->delta.x computes the distance to the next 
+	vertical grid line in the x-direction that the ray will hit.
+8. dda_algo time (bitch)
+
+n the DDA (Digital Differential Analyzer) algorithm used for raycasting, 
+the goal is to find the intersection of a
+ ray with the walls in the 2D grid-based map.
+ The loop in the dda_algo function keeps advancing the ray until it hits a wall. Lets break down the purpose of the lines you mentioned:
+
+while (1)
+{
+    if (rays->side_dist.x < rays->side_dist.y)
+    {
+        rays->side_dist.x += rays->delta.x;
+        rays->map.x += rays->step.x;
+        rays->side_hit = 0;
+    }
+    else
+    {
+        rays->side_dist.y += rays->delta.y;
+        rays->map.y += rays->step.y;
+        rays->side_hit = 1;
+    }
+    if (data->map[rays->map.y][rays->map.x] != '0')
+        break ;
+}
+Deciding the Next Step:
+
+The if (rays->side_dist.x < rays->side_dist.y) condition checks whether the next step in the x-direction (rays->map.x) or the y-direction (rays->map.y) should be taken based on which side of the current square boundary the ray is closer to.
+Updating Side Distance and Map Position:
+
+If the x-direction is chosen (rays->side_dist.x < rays->side_dist.y), then rays->side_dist.x is incremented by rays->delta.x, and rays->map.x is updated by rays->step.x. This means the next vertical boundary in the x-direction is considered, and rays->side_hit is set to 0.
+If the y-direction is chosen (rays->side_dist.y <= rays->side_dist.x), then rays->side_dist.y is incremented by rays->delta.y, and rays->map.y is updated by rays->step.y. This means the next horizontal boundary in the y-direction is considered, and rays->side_hit is set to 1.
+Breaking the Loop When a Wall is Hit:
+
+The loop continues until a wall is encountered. The condition if (data->map[rays->map.y][rays->map.x] != '0') checks whether the current position in the map contains a wall ('0' is often used to represent an empty space). If a wall is found, the loop breaks, and the algorithm has successfully found the intersection point.
+In summary, the purpose of incrementing rays->map.y is to move the ray vertically in the y-direction until it hits a wall, while simultaneously updating other necessary variables (rays->side_dist.y, rays->step.y, and rays->side_hit). This process is essential for determining where the ray intersects with the walls in the grid. 
+
+9. Get important values such as (if it has hit the side, check the direction its)
+heading, calculate the perpendicular distance to the wall, and calculate the texture
+to be used for the wall that that specifiic ray is touching.
+10. rays->perp_dist *= cos(ray_angle - data->face_ang);
+rays->wall_h = (int)(HEIGHT / rays->perp_dist);
+The multiplication by cos(ray_angle - data->face_ang) is the perspective
+ correction factor, and the resulting rays->wall_h represents the corrected 
+ height of the wall on the screen. This correction is crucial for achieving a
+  realistic 3D rendering where objects scale correctly based on their 
+  distance and the players viewing angle.
+
+11. 
