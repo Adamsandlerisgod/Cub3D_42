@@ -6,7 +6,7 @@
 /*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:04:19 by whendrik          #+#    #+#             */
-/*   Updated: 2024/02/07 15:21:13 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/02/22 13:22:54 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	draw_avatar(t_data *data)
 {
 	int i;
 	
-	draw_ray(data)
+	// draw_ray(data);
 	for (i = 0; i < 20; i++)
 			my_mlx_pixel_put(&data->img, data->avatar_pos.x + i, data->avatar_pos.y, 0x00FF0000);
 	for (i = 0; i < 20; i++)
@@ -109,11 +109,11 @@ int main(int ac, char **av)
 	char *map[] =
 	{
 	"11111111",
+	"10000001",
 	"10010001",
-	"10010001",
-	"10010001",
-	"10010001",
-	"10010001",
+	"10000001",
+	"10001001",
+	"10000001",
 	"10010001",
 	"11111111"
 	};
