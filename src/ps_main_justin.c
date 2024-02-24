@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_justin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
+/*   By: justindaly <justindaly@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 18:48:51 by jdaly             #+#    #+#             */
-/*   Updated: 2024/02/07 18:50:44 by jdaly            ###   ########.fr       */
+/*   Updated: 2024/02/21 21:32:24 by justindaly       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 // int main(int argc, char *argv[])
 // {
 // 	t_mapinfo	mapinfo;
+// 	int			exit_code;
 
-// 	validate_map(argc, argv, &mapinfo);
-// 	return (0);
+// 	exit_code = validate_cub(argc, argv, &mapinfo);
+// 	return (exit_code);
 // }
