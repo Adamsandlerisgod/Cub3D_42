@@ -6,7 +6,7 @@
 /*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:04:19 by whendrik          #+#    #+#             */
-/*   Updated: 2024/02/22 13:22:54 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/02/29 19:12:53 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,6 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 			(img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
-
-// void	draw_grid_vertical(t_img *img, int width)
-// {
-// 		for (int j = 0; img->width > (img->width/width) * j; j++)
-// 		{
-// 			for (int k = 0; k < img->height; k++)
-// 				my_mlx_pixel_put(img, (img->width/width) * j, k, 0x000000FF);
-// 		}
-// }
-// void	draw_grid_horizontal(t_img *img, int height)
-// {
-// 		for (int j = 0; img->height > (img->height/height) * j; j++)
-// 		{
-// 			for (int k = 0; k < img->width; k++)
-// 				my_mlx_pixel_put(img, k, (img->height/height) * j, 0x000000FF);
-// 		}
-// }
-
-// void	draw_grid(t_img *img, int width, int height)
-// {
-// 	draw_grid_horizontal(img, height);
-// 	draw_grid_vertical(img, width);
-// }
 
 void	draw_avatar(t_data *data)
 {
@@ -67,14 +44,20 @@ void	draw_avatar(t_data *data)
 
 void	moving(int key, t_data *data)
 {
-	if (key == KEY_LEFT)
+	//MOVING
+	if (key == KEY_A)
 		data->avatar_pos.x -= 20;
-	if (key == KEY_RIGHT)
+	if (key == KEY_D)
 		data->avatar_pos.x += 20;
-	if (key == KEY_UP)
+	if (key == KEY_UP || key == KEY_W)
 		data->avatar_pos.y -= 20;
-	if (key == KEY_DOWN)
+	if (key == KEY_DOWN || key == KEY_S)
 		data->avatar_pos.y += 20;
+	//ROTATING
+	if (key == KEY_LEFT)
+		data->facing_angle -= 0.1;
+	if (key == KEY_RIGHT)
+		data->facing_angle += 0.1;
 		
 }
 
@@ -106,25 +89,28 @@ int	key_hook(int key, t_data *data)
 int main(int ac, char **av)
 {
 	t_data	data;
-	char *map[] =
-	{
-	"11111111",
-	"10000001",
-	"10010001",
-	"10000001",
-	"10001001",
-	"10000001",
-	"10010001",
-	"11111111"
-	};
+	t_mapinfo	mapinfo;
+
+	if (validate_map(ac, av, &mapinfo))
+		return (0);
+	// char *map[] =
+	// {
+	// "11111111",
+	// "10000001",
+	// "10010001",
+	// "10000001",
+	// "10001001",
+	// "10000001",
+	// "10010001",
+	// "11111111"
+	// };
 	
 	printf("waacka && %s && %d \n", av[0], ac);
 	
-	init_data(&data, map);
+	init_data(&data, &mapinfo);
 	
 	data.mlx.mlx = mlx_init();
 	data.mlx.mlx_win = mlx_new_window(data.mlx.mlx, data.mlx.win_width,	data.mlx.win_height, "Cub3D");
-	// int i = 0;
 	if (1)
 	{
 		data.img.img = mlx_new_image(data.mlx.mlx, data.mlx.win_width,
@@ -136,7 +122,7 @@ int main(int ac, char **av)
 		{
 			// draw_grid(&data.img, 10, 10);
 			draw_map(&data);
-			draw_avatar(&data);
+			// draw_avatar(&data);
 		}
 		mlx_put_image_to_window(data.mlx.mlx, data.mlx.mlx_win, data.img.img, 0, 0);
 		mlx_loop(data.mlx.mlx);

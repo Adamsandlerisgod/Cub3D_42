@@ -78,8 +78,15 @@ If the x-direction is chosen (rays->side_dist.x < rays->side_dist.y), then rays-
 If the y-direction is chosen (rays->side_dist.y <= rays->side_dist.x), then rays->side_dist.y is incremented by rays->delta.y, and rays->map.y is updated by rays->step.y. This means the next horizontal boundary in the y-direction is considered, and rays->side_hit is set to 1.
 Breaking the Loop When a Wall is Hit:
 
-The loop continues until a wall is encountered. The condition if (data->map[rays->map.y][rays->map.x] != '0') checks whether the current position in the map contains a wall ('0' is often used to represent an empty space). If a wall is found, the loop breaks, and the algorithm has successfully found the intersection point.
-In summary, the purpose of incrementing rays->map.y is to move the ray vertically in the y-direction until it hits a wall, while simultaneously updating other necessary variables (rays->side_dist.y, rays->step.y, and rays->side_hit). This process is essential for determining where the ray intersects with the walls in the grid. 
+The loop continues until a wall is encountered. The condition if 
+(data->map[rays->map.y][rays->map.x] != '0') checks whether the current position
+ in the map contains a wall ('0' is often used to represent an empty space). 
+ If a wall is found, the loop breaks, and the algorithm has successfully found
+the intersection point. In summary, the purpose of incrementing rays->map.y is 
+to move the ray vertically in the y-direction until it hits a wall, while 
+simultaneously updating other necessary variables (rays->side_dist.y, 
+rays->step.y, and rays->side_hit). This process is essential for determining
+ where the ray intersects with the walls in the grid. 
 
 9. Get important values such as (if it has hit the side, check the direction its)
 heading, calculate the perpendicular distance to the wall, and calculate the texture
