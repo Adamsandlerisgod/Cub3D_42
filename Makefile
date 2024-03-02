@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+         #
+#    By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/30 16:08:21 by whendrik          #+#    #+#              #
-#    Updated: 2024/02/07 18:50:19 by jdaly            ###   ########.fr        #
+#    Updated: 2024/02/29 18:49:35 by whendrik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,14 @@ NAME = Cub3D
 LIBFT = libft/libft.a
 MLX = mlx/libmlx.a
 SRC_DIR = src
-SRC_FILES= main.c draw_map.c init_data.c check_args.c error.c init_mapinfo.c validate_map.c main_justin.c
+SRC_FILES= main.c \
+			draw_map.c \
+			init_data.c \
+			check_args.c \
+			error.c \
+			init_mapinfo.c \
+			validate_map.c \
+			main_justin.c
 
 OBJ_DIR = obj
 INC_DIR = includes

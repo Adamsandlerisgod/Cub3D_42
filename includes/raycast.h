@@ -6,7 +6,7 @@
 /*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:48:37 by whendrik          #+#    #+#             */
-/*   Updated: 2024/02/24 12:43:46 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/03/01 14:53:04 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,12 @@ typedef struct s_coor
 	float	y;
 }		t_coor;
 
+typedef struct s_coor_int
+{
+	int	x;
+	int	y;
+}		t_coor_int;
+
 typedef struct s_coor_db
 {
 	double	x;
@@ -122,19 +128,32 @@ typedef struct s_ray
 	t_coor_db	dist_to_side;
 	t_coor		step;
 	t_coor_db	delta;
-	t_coor		map;
+	t_coor_int		map;
 	bool		hit_side;
 	double		perp_dist;
 	int			wall_height;
 	int			wall_hit_x;
+	t_img		wall_txt;
 }		t_ray;
+
+typedef struct s_textures
+{
+	t_img	no;
+	t_img	so;
+	t_img	we;
+	t_img	ea;
+	int		floor_color;
+	int		ceiling_color;
+}		t_textures;
+
 typedef struct s_data
 {
 	t_mlx		mlx;
 	t_img		img;
-	t_coor		avatar_pos;
+	t_coor_int	avatar_pos;
 	t_mapinfo	mapinfo;
 	double		facing_angle;
+	t_textures	textures;
 	// t_coor_db	dir;
 	char		**map;
 	t_ray		raycast;
@@ -149,7 +168,7 @@ int		check_file(char *arg);
 int		validate_map(int argc, char **argv, t_mapinfo *m_info);
 
 /*Initialization*/
-void	init_data(t_data *data, char **map);
+void	init_data(t_data *data, t_mapinfo *map);
 
 /*Draw Functions*/
 void	draw_grid(t_img *img, int width, int height);
@@ -159,5 +178,6 @@ void	draw_avatar(t_data *data);
 int		draw_map(t_data	*data);
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void	ray_cast(t_data *data, t_ray *rays, int x);
 
 #endif
