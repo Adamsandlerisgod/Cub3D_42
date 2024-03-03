@@ -6,7 +6,7 @@
 /*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:04:19 by whendrik          #+#    #+#             */
-/*   Updated: 2024/02/29 19:12:53 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/03/02 18:47:57 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int main(int ac, char **av)
 	t_data	data;
 	t_mapinfo	mapinfo;
 
-	if (validate_map(ac, av, &mapinfo))
+	if (validate_cub(ac, av, &mapinfo))
 		return (0);
 	// char *map[] =
 	// {
