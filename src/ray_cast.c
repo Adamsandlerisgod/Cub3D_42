@@ -6,7 +6,7 @@
 /*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 15:11:17 by whendrik          #+#    #+#             */
-/*   Updated: 2024/03/02 18:25:03 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/03/02 18:51:00 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,41 +48,8 @@ void	values_for_texture(t_data *data, t_ray *ray)
 	cal_wall_hit_x(ray, wall_hit);
 }
 
-static void	assign_direction_hero(t_data *data, char dir)
-{
-	if (dir == 'N')
-		data->facing_angle = PI / 2;
-	else if (dir == 'S')
-		data->facing_angle = 3 * PI / 2;
-	else if (dir == 'W')
-		data->facing_angle = 0;
-	else if (dir == 'E')
-		data->facing_angle = PI;
-}
 
-static void set_direction_of_step(t_data *data, t_ray *rays)
-{
-  if (rays->dir.x < 0)
-	{
-		rays->step.x = -1;
-		rays->dist_to_side.x = (data->avatar_pos.x - rays->map.x) * rays->delta.x;
-	}
-	else
-	{
-		rays->step.x = 1;
-		rays->dist_to_side.x = (rays->map.x + 1.0 - data->avatar_pos.x) * rays->delta.x;
-	}
-	if (rays->dir.y < 0)
-	{
-		rays->step.y = -1;
-		rays->dist_to_side.y = (data->avatar_pos.y - rays->map.y) * rays->delta.y;
-	}
-	else
-	{
-		rays->step.y = 1;
-		rays->dist_to_side.y = (rays->map.y + 1.0 - data->avatar_pos.y) * rays->delta.y;
-	}
-}
+
 static void	ray_cast_init(t_data *data, t_ray *rays)
 {
 	
