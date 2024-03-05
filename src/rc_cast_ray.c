@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray_cast.c                                         :+:      :+:    :+:   */
+/*   rc_cast_ray.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 15:11:17 by whendrik          #+#    #+#             */
-/*   Updated: 2024/03/02 18:51:00 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/03/05 21:25:16 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/raycast.h"
 
-void	cal_wall_hit_x(t_ray *ray, double wall_hit)
+static void	cal_wall_hit_x(t_ray *ray, double wall_hit)
 {
 	wall_hit -= floor(wall_hit);
 	ray->wall_hit_x = (wall_hit * (double)ray->wall_txt.width);
@@ -21,7 +21,7 @@ void	cal_wall_hit_x(t_ray *ray, double wall_hit)
 			ray->wall_hit_x = ray->wall_txt.width - ray->wall_hit_x - 1;
 }
 
-void	values_for_texture(t_data *data, t_ray *ray)
+static void	values_for_texture(t_data *data, t_ray *ray)
 {
 	double wall_hit;
 	
@@ -40,7 +40,7 @@ void	values_for_texture(t_data *data, t_ray *ray)
 		ray->perp_dist =  ray->dist_to_side.y - ray->delta.y;
 		wall_hit = data->avatar_pos.y + ray->perp_dist * ray->dir.y;
 		if (ray->dir.x < 0)
-			ray->wall_txt = data->textures.we;//Add texture to data
+			ray->wall_txt = data->textures.we;
 		else
 			ray->wall_txt = data->textures.ea;
 			
