@@ -6,7 +6,7 @@
 /*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:48:37 by whendrik          #+#    #+#             */
-/*   Updated: 2024/03/02 18:43:25 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/03/05 21:54:13 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ typedef struct s_ray
 	t_coor_db	dist_to_side;
 	t_coor		step;
 	t_coor_db	delta;
-	t_coor_int		map;
+	t_coor_int	map;
 	bool		hit_side;
 	double		perp_dist;
 	int			wall_height;
@@ -148,14 +148,12 @@ typedef struct s_textures
 typedef struct s_data
 {
 	t_mlx		mlx;
-	t_img		img;
 	t_coor_int	avatar_pos;
 	t_mapinfo	mapinfo;
 	double		facing_angle;
 	t_textures	textures;
-	// t_coor_db	dir;
 	char		**map;
-	t_ray		raycast;
+	t_img		ray_to_draw;
 }		t_data;
 
 /********PARSING*********/
@@ -187,16 +185,20 @@ int		check_grid(t_mapinfo *mapinfo);
 int		check_walls(t_mapinfo *mapinfo);
 
 /*Initialization*/
-void	init_data(t_data *data, t_mapinfo *map);
+void	init_assign_data(t_data *data, t_mapinfo *map);
+bool	init_program(t_data *data, t_mapinfo *mapinfo);
+
 
 /*Draw Functions*/
 void	draw_grid(t_img *img, int width, int height);
 // void	draw_grid_horizontal(t_img *img, int height);
 // void	draw_grid_vertical(t_img *img, int width);
-void	draw_avatar(t_data *data);
-int		draw_map(t_data	*data);
-
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+// void	draw_avatar(t_data *data);
+// int		draw_map(t_data	*data);
+int draw_ray(t_data *data);
+void img_draw_background(t_data *data);
+int	get_pixel_color(t_img *img, int x, int y);
+void	img_draw_pixel(t_img *img, int x, int y, unsigned int color);
 void	ray_cast(t_data *data, t_ray *rays, int x);
 
 #endif
