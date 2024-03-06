@@ -6,13 +6,24 @@
 /*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:48:41 by jdaly             #+#    #+#             */
-/*   Updated: 2024/03/06 20:54:31 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:43:40 by jdaly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/raycast.h"
 
-//fill mapinfo struct
+/* convert rgb string to rgb int */
+void	rgb_to_int(int *value, char *rgb)
+{
+	char	**color;
+
+	color = ft_split(rgb, ',');
+	*value = (ft_atoi(color[0]) << 16) | (ft_atoi(color[1]) << 8)
+		| ft_atoi(color[2]);
+	free_array(color);
+}
+
+/* fill mapinfo struct data */
 int	fill_mapinfo_struct(t_mapinfo *info, char type, char *path)
 {
 	if (type == 'N')
@@ -24,45 +35,34 @@ int	fill_mapinfo_struct(t_mapinfo *info, char type, char *path)
 	else if (type == 'W')
 		info->we_path = ft_strdup(path);
 	else if (type == 'F')
+	{
 		info->f_color_str = ft_strdup(path);
-		// info->f_color_str = rgb_to_int(path);
-		//convert color to int;
+		rgb_to_int(&info->f_color_int, path);
+	}
 	else if (type == 'C')
+	{
 		info->c_color_str = ft_strdup(path);
-		//convert color to int
+		rgb_to_int(&info->c_color_int, path);
+	}
 	return (SUCCESS);
 }
 
 int	get_texture_info(t_mapinfo *mapinfo, char *line)
 {
-	char	**texture_data;
+	char	**t_data;
 
-	texture_data = ft_split(line, ' ');
-	if (count_array_elements(texture_data) != 2)
-	{
-		free_array(texture_data);
-		return (err_msg(line, "invalid texture line", ERR_INFO));
-	}
-	if (!is_valid_texture_type(texture_data[0]))
-	{
-		free_array(texture_data);
-		return (err_msg(line, "invalid texture type", ERR_INFO));
-	}
-	if (is_valid_texture_path(texture_data[0][0], texture_data[1])) //check if the texture paths are valid
-	{
-		free_array(texture_data);
-		return (ERR_INFO);
-	}
-	if (is_duplicate_type(mapinfo, texture_data[0][0])) //check for duplicates
-	{
-		free_array(texture_data);
-		return (err_msg(line, "duplicate type", ERR_INFO));
-	}
-	// printf("FILLING INFO...\n");
-	fill_mapinfo_struct(mapinfo, texture_data[0][0], texture_data[1]);//set paths in mapinfo struct
-	// printf("INFO FILLED!\n");
-	free_array(texture_data);
-	return (0);
+	t_data = ft_split(line, ' ');
+	if (count_array_elements(t_data) != 2)
+		return (free_array(t_data), err_msg(line, "texture line", ERR_INFO));
+	if (!is_valid_texture_type(t_data[0]))
+		return (free_array(t_data), err_msg(line, "texture type", ERR_INFO));
+	if (is_valid_texture_path(t_data[0][0], t_data[1]))
+		return (free_array(t_data), ERR_INFO);
+	if (is_duplicate_type(mapinfo, t_data[0][0]))
+		return (free_array(t_data), err_msg(line, "duplicate type", ERR_INFO));
+	fill_mapinfo_struct(mapinfo, t_data[0][0], t_data[1]);
+	free_array(t_data);
+	return (SUCCESS);
 }
 
 void	create_map_array(t_mapinfo *info, char **lines, int i)
@@ -101,10 +101,11 @@ int	check_texture_info(t_mapinfo *m_info)
 	i = 0;
 	while (lines[i])
 	{
-		if (get_texture_info(m_info, lines[i]) == ERR_INFO) 		//check texture data
+		if (get_texture_info(m_info, lines[i]) == ERR_INFO)
 			return (free_array(lines), ERR_INFO);
 		i++;
-		if (m_info->no_path && m_info->so_path && m_info->ea_path && m_info->we_path && m_info->c_color_str && m_info->f_color_str) //break if all textures (NO, SO, EA, WE, C, F) found
+		if (m_info->no_path && m_info->so_path && m_info->ea_path
+			&& m_info->we_path && m_info->c_color_str && m_info->f_color_str)
 		{
 			printf("all texture info found!\n");
 			break ;
@@ -112,9 +113,9 @@ int	check_texture_info(t_mapinfo *m_info)
 	}
 	if (lines[i] == NULL)
 		return (free_array(lines), err_msg(NULL, "no map in file", ERR_INFO));
-	else if (lines[i] != NULL) // check if there is more data after texture info
-		m_info->map_bgn = ft_strdup(lines[i]); //set first line of map
-	create_map_array(m_info, lines, i); //create 2D MAP ARRAY
+	else if (lines[i] != NULL)
+		m_info->map_bgn = ft_strdup(lines[i]);
+	create_map_array(m_info, lines, i);
 	print_array(lines);
 	free_array(lines);
 	return (0);
