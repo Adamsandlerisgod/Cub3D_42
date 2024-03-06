@@ -6,7 +6,7 @@
 /*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:51:55 by jdaly             #+#    #+#             */
-/*   Updated: 2024/03/06 16:45:22 by jdaly            ###   ########.fr       */
+/*   Updated: 2024/03/06 19:30:25 by jdaly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,28 @@ int	is_valid_color_code(char *color)
 	return (1);
 }
 
+int	is_valid_color_path(char *path)
+{
+	int		i;
+	char	**color;
+
+	color = ft_split(path, ',');
+	if (count_array_elements(color) != 3)
+		return (free_array(color), err_msg(path, "f/c color", FAILURE));
+	i = 0;
+	while (i < 3)
+	{
+		if (!is_valid_color_code(color[i]))
+			return (free_array(color), err_msg(path, "f/c code", FAILURE));
+		i++;
+	}
+	free_array(color);
+	return (SUCCESS);
+}
+
 int	is_valid_texture_path(char type, char *path)
 {
 	int		fd;
-	int		i;
-	char	**color;
 
 	fd = open(path, O_RDONLY);
 	if (type == 'N' || type == 'S' || type == 'E' || type == 'W')
@@ -69,30 +86,9 @@ int	is_valid_texture_path(char type, char *path)
 		close(fd);
 	}
 	else if (type == 'F' || type == 'C')
-	{
-		color = ft_split(path, ',');
-		if (count_array_elements(color) != 3)
-			return (free_array(color), err_msg(path, "f/c color", FAILURE));
-		i = 0;
-		while (i < 3)
-		{
-			if (!is_valid_color_code(color[i]))
-				return (free_array(color), err_msg(path, "f/c code", FAILURE));
-			i++;
-		}
-		free_array(color);
-	}
+		return (is_valid_color_path(path));
 	else
 		return (FAILURE);
 	return (SUCCESS);
 }
 
-int	is_duplicate_type(t_mapinfo *info, char type)
-{
-	return ((type == 'N' && info->no_path)
-		|| (type == 'S' && info->so_path)
-		|| (type == 'W' && info->we_path)
-		|| (type == 'E' && info->ea_path)
-		|| (type == 'F' && info->f_color_str)
-		|| (type == 'C' && info->c_color_str));
-}
