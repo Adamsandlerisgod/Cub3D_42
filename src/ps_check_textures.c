@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ps_check_textures.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
+/*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:48:41 by jdaly             #+#    #+#             */
 /*   Updated: 2024/03/06 16:43:40 by jdaly            ###   ########.fr       */

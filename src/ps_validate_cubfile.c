@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_validate_cubfile.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
+/*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 17:03:33 by jdaly             #+#    #+#             */
-/*   Updated: 2024/03/06 16:46:53 by jdaly            ###   ########.fr       */
+/*   Updated: 2024/03/06 21:03:43 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,6 @@ int	validate_cub(int argc, char **argv, t_mapinfo *m_info)
 	if (check_double_nl(m_info) == ERR_MAP)
 		return (free_mapinfo(m_info), ERR_MAP);
 	print_mapinfo(m_info);
-	free_mapinfo(m_info);
+	// free_mapinfo(m_info); (Must be freed at a different place)
 	return (SUCCESS);
 }
