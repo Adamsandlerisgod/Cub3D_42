@@ -6,7 +6,7 @@
 /*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:48:37 by whendrik          #+#    #+#             */
-/*   Updated: 2024/03/05 21:54:13 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/03/06 20:47:30 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,16 @@ typedef struct s_textures
 	int		ceiling_color;
 }		t_textures;
 
+typedef struct s_keypress
+{
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
+	bool	r;
+	bool	l;
+}	t_keypress;
+
 typedef struct s_data
 {
 	t_mlx		mlx;
@@ -154,6 +164,7 @@ typedef struct s_data
 	t_textures	textures;
 	char		**map;
 	t_img		ray_to_draw;
+	t_keypress	key;
 }		t_data;
 
 /********PARSING*********/
@@ -185,9 +196,13 @@ int		check_grid(t_mapinfo *mapinfo);
 int		check_walls(t_mapinfo *mapinfo);
 
 /*Initialization*/
-void	init_assign_data(t_data *data, t_mapinfo *map);
-bool	init_program(t_data *data, t_mapinfo *mapinfo);
+bool	init_assign_data(t_data *data, t_mapinfo *map);
+bool	init_program(t_data *data, t_mapinfo *map);
 
+/*KEY PRESS*/
+int	key_press(int key, t_data *data);
+int	key_release(int key, t_data *data);
+int	kill_program(t_data *data);
 
 /*Draw Functions*/
 void	draw_grid(t_img *img, int width, int height);

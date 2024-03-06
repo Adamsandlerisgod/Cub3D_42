@@ -6,7 +6,7 @@
 /*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:29:23 by whendrik          #+#    #+#             */
-/*   Updated: 2024/03/05 21:53:30 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/03/06 17:03:25 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,13 @@ void img_draw_background(t_data *data)
         while (current_position.x < WIDTH)
         {
             // Check if the current pixel is above or at the middle of the canvas
-            if (current_position.y <= HEIGHT / 2)
                 // Draw the pixel with the ceiling texture color
+                // Draw the pixel with the floor texture color
+                data->textures.ceiling_color = 0x00FF0000;
+                data->textures.floor_color = 0x000000FF;
+            if (current_position.y <= HEIGHT / 2)
                 img_draw_pixel(&data->ray_to_draw, current_position.x, current_position.y, data->textures.ceiling_color);
             else
-                // Draw the pixel with the floor texture color
                 img_draw_pixel(&data->ray_to_draw, current_position.x, current_position.y, data->textures.floor_color);
 
             // Move to the next column
