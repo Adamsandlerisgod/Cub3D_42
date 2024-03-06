@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
+/*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:48:37 by whendrik          #+#    #+#             */
-/*   Updated: 2024/03/06 17:01:00 by jdaly            ###   ########.fr       */
+/*   Updated: 2024/03/05 21:54:13 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@
 # define KEY_W		13
 # define KEY_M		46
 # define PI	3.14159265358979
+
+# define HEIGHT 768
+# define WIDTH 1024
+/*Half (FOV) angle*/
+# define FOV 0.4235987756
+
+/* movement speed */
+# define SPEED 0.05
 
 # define SUCCESS 0
 # define FAILURE 1
@@ -98,13 +106,54 @@ typedef struct s_coor
 	float	y;
 }		t_coor;
 
+typedef struct s_coor_int
+{
+	int	x;
+	int	y;
+}		t_coor_int;
+
+typedef struct s_coor_db
+{
+	double	x;
+	double	y;
+}		t_coor_db;
+
+typedef struct s_ray
+{
+	double		step_angle;
+	t_coor		avatar_pos;
+	t_coor_db	dir;
+	float		dir_angle;
+	t_coor_db	dist_to_side;
+	t_coor		step;
+	t_coor_db	delta;
+	t_coor_int	map;
+	bool		hit_side;
+	double		perp_dist;
+	int			wall_height;
+	int			wall_hit_x;
+	t_img		wall_txt;
+}		t_ray;
+
+typedef struct s_textures
+{
+	t_img	no;
+	t_img	so;
+	t_img	we;
+	t_img	ea;
+	int		floor_color;
+	int		ceiling_color;
+}		t_textures;
+
 typedef struct s_data
 {
 	t_mlx		mlx;
-	t_img		img;
-	t_coor		avatar_pos;
+	t_coor_int	avatar_pos;
 	t_mapinfo	mapinfo;
+	double		facing_angle;
+	t_textures	textures;
 	char		**map;
+	t_img		ray_to_draw;
 }		t_data;
 
 /********PARSING*********/
@@ -142,15 +191,20 @@ int		check_grid(t_mapinfo *mapinfo);
 int		check_walls(t_mapinfo *mapinfo);
 
 /*Initialization*/
-void	init_data(t_data *data, char **map);
+void	init_assign_data(t_data *data, t_mapinfo *map);
+bool	init_program(t_data *data, t_mapinfo *mapinfo);
+
 
 /*Draw Functions*/
 void	draw_grid(t_img *img, int width, int height);
 // void	draw_grid_horizontal(t_img *img, int height);
 // void	draw_grid_vertical(t_img *img, int width);
-void	draw_avatar(t_data *data);
-int		draw_map(t_data	*data);
-
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+// void	draw_avatar(t_data *data);
+// int		draw_map(t_data	*data);
+int draw_ray(t_data *data);
+void img_draw_background(t_data *data);
+int	get_pixel_color(t_img *img, int x, int y);
+void	img_draw_pixel(t_img *img, int x, int y, unsigned int color);
+void	ray_cast(t_data *data, t_ray *rays, int x);
 
 #endif

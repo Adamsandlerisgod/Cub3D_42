@@ -1,0 +1,7 @@
+validate map returns 0 when a map is not found
+cub3d: Error: ./textures/test/north.xpm: No such file or directory
+cub3d: Error: ./textures/test/south.xpm: No such file or directory
+cub3d: Error: ./textures/test/west.xpm: No such file or directory
+cub3d: Error: ./textures/test/east.xpm: No such file or directory
+
+It cannot find the textures. It doesnt follow the path.
