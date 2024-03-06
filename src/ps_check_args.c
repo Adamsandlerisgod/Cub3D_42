@@ -6,17 +6,18 @@
 /*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 16:45:10 by justindaly        #+#    #+#             */
-/*   Updated: 2024/02/23 18:54:38 by jdaly            ###   ########.fr       */
+/*   Updated: 2024/03/06 15:16:35 by jdaly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/raycast.h"
 
+/* checks if file is a directory */
 static	int	is_dir(char *arg)
 {
 	int		fd;
 
-	fd = open(arg, O_DIRECTORY); //O_DIRECTORY ensures it is a directory
+	fd = open(arg, O_DIRECTORY);
 	if (fd >= 0)
 	{
 		close(fd);
@@ -25,6 +26,7 @@ static	int	is_dir(char *arg)
 	return (0);
 }
 
+/* checks if file is a .cub file*/
 static	int	is_cub_file(char *arg)
 {
 	size_t	len;
@@ -36,6 +38,7 @@ static	int	is_cub_file(char *arg)
 	return (1);
 }
 
+/* check file */
 int	check_file(char *arg)
 {
 	int	fd;
@@ -46,7 +49,7 @@ int	check_file(char *arg)
 	if (fd == -1)
 		return (err_msg(arg, strerror(errno), FAILURE));
 	close(fd);
-	if (!is_cub_file(arg)) //checks if it is a .cub file
+	if (!is_cub_file(arg))
 		return (err_msg(arg, "is not a .cub file", FAILURE));
 	return (SUCCESS);
 }
