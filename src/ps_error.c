@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ps_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:02:38 by justindaly        #+#    #+#             */
-/*   Updated: 2024/02/23 17:14:14 by jdaly            ###   ########.fr       */
+/*   Updated: 2024/03/06 16:02:31 by jdaly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,8 @@ void	print_mapinfo(t_mapinfo *mapinfo)
 	printf("ea_path: %s\n", mapinfo->ea_path);
 	printf("f_color_str: %s\n", mapinfo->f_color_str);
 	printf("c_color_str: %s\n", mapinfo->c_color_str);
-	//printf("f_color (rgb): %d (%u,%u,%u)\n", mapinfo->f_color,
-		//get_r(mapinfo->f_color), get_g(mapinfo->f_color), get_b(mapinfo->f_color));
-	//printf("c_color (rgb): %d (%u,%u,%u)\n", mapinfo->c_color,
-		//get_r(mapinfo->c_color), get_g(mapinfo->c_color), get_b(mapinfo->c_color));
+	printf("f_color_int (rgb): %d\n", mapinfo->f_color_int);
+	printf("c_color_int (rgb): %d\n", mapinfo->c_color_int);
 	printf("height: %d\n", mapinfo->height);
 	printf("width: %d\n", mapinfo->width);
 	printf("p_start (xy): %d, %d\n", mapinfo->p_start_x, mapinfo->p_start_y);

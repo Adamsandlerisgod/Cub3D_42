@@ -6,7 +6,7 @@
 /*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:48:37 by whendrik          #+#    #+#             */
-/*   Updated: 2024/02/23 20:15:31 by jdaly            ###   ########.fr       */
+/*   Updated: 2024/03/06 17:01:00 by jdaly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,12 @@ int		is_valid_texture_type(char *mapdir);
 int		is_valid_color_code(char *color);
 int		is_valid_texture_path(char type, char *path);
 int		is_duplicate_type(t_mapinfo *info, char type);
+
+/* Flood Fill Utils */
+int		is_fillable_up(t_mapinfo *mapinfo, int x, int y);
+int		is_fillable_down(t_mapinfo *mapinfo, int x, int y);
+int		is_fillable_right(t_mapinfo *mapinfo, int x, int y);
+int		is_fillable_left(t_mapinfo *mapinfo, int x, int y);
 
 /*Parsing Checks*/
 int		check_file(char *arg);
