@@ -13,7 +13,7 @@
 #ifndef RAYCAST_H
 # define RAYCAST_H
 # include "../libft/includes/libft.h"
-# include "../mlx/mlx.h"
+# include "../mlx_linux/mlx.h"
 # include <math.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -25,16 +25,16 @@
 # define X_EVENT_KEY_PRESS	2
 # define X_EVENT_KEY_RELEASE	3
 # define X_EVENT_KEY_EXIT	17
-# define KEY_ESC     53
-# define KEY_LEFT	123
-# define KEY_RIGHT	124
-# define KEY_UP  	126
-# define KEY_DOWN	125
-# define KEY_A		0
-# define KEY_S		1
-# define KEY_D		2
-# define KEY_W		13
-# define KEY_M		46
+# define KEY_ESC     65307
+# define KEY_LEFT    65361
+# define KEY_RIGHT   65363
+# define KEY_UP      65362
+# define KEY_DOWN    65364
+# define KEY_A       97
+# define KEY_S       115
+# define KEY_D       100
+# define KEY_W       119
+
 # define PI	3.14159265358979
 
 # define HEIGHT 768
@@ -203,7 +203,7 @@ int		check_walls(t_mapinfo *mapinfo);
 
 /*Initialization*/
 bool	assign_data(t_data *data, t_mapinfo *map);
-void	init_data(t_data *data);
+void	init_data(t_data *data, t_mapinfo *mapinfo);
 bool	init_program(t_data *data, t_mapinfo *map);
 
 /*KEY PRESS*/

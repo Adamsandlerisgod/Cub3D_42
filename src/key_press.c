@@ -14,11 +14,11 @@
 
 int	key_release(int key, t_data *data)
 {
-	if (key == KEY_W)
+	if (key == KEY_W || key == KEY_UP)
 		data->key.w = false;
 	else if (key == KEY_A)
 		data->key.a = false;
-	else if (key == KEY_S)
+	else if (key == KEY_S || key == KEY_DOWN)
 		data->key.s = false;
 	else if (key == KEY_D)
 		data->key.d = false;
@@ -33,11 +33,11 @@ int	key_press(int key, t_data *data)
 {
 	if (key == KEY_ESC)
 		kill_program(data);
-	if (key == KEY_W)
+	if (key == KEY_W || key == KEY_UP)
 		data->key.w = true;
 	else if (key == KEY_A)
 		data->key.a = true;
-	else if (key == KEY_S)
+	else if (key == KEY_S || key == KEY_DOWN)
 		data->key.s = true;
 	else if (key == KEY_D)
 		data->key.d = true;
@@ -45,5 +45,6 @@ int	key_press(int key, t_data *data)
 		data->key.l = true;
 	else if (key == KEY_RIGHT)
 		data->key.r = true;
+	printf("key_press %d\n", key);
 	return (0);
 }

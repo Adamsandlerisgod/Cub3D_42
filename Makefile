@@ -11,9 +11,9 @@
 # **************************************************************************** #
 
 #FLAGS
-CC = gcc
+CC = clang
 C_FLAGS = -Wall -Wextra -Werror -g -o3
-M_FLAGS = -Llibft -Imlx -Lmlx -Lmlx -framework OpenGL -framework AppKit
+# M_FLAGS = -lmlx -lm -lbsd -lX11 -lXext
 # S_FLAGS = -g -fsanitize=address,undefined
 
 #commands
@@ -23,7 +23,7 @@ AR = ar rc
 #Targlib name and dirs
 NAME = Cub3D
 LIBFT = libft/libft.a
-MLX = mlx/libmlx.a
+MLX = mlx_linux/libmlx.a
 SRC_DIR = src
 SRC_FILES = main.c  key_press.c  move_avatar.c rc_draw_map.c rc_assign_data.c rc_draw_ray.c rc_draw_utils.c rc_cast_ray.c\
 		ps_check_args.c ps_check_grid.c ps_check_textures.c ps_check_walls.c \
@@ -32,7 +32,7 @@ SRC_FILES = main.c  key_press.c  move_avatar.c rc_draw_map.c rc_assign_data.c rc
 		
 OBJ_DIR = obj
 INC_DIR = includes
-MLX_DIR = mlx
+MLX_DIR = mlx_linux
 LIBFT_DIR = libft
 INCS = -I$(INC_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
 
@@ -53,11 +53,11 @@ $(MLX):
 # Object file build rule
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(dir $@)
-	$(CC) $(C_FLAGS) -c $< -o $@
+	$(CC) $(C_FLAGS) -I $(INC_DIR) -I $(MLX_DIR) -c $< -o $@
 
 
 $(NAME): $(OBJECTS) $(LIBFT) $(MLX)
-	$(CC) $(C_FLAGS) $^ $(M_FLAGS) $(INCS) -o $(NAME)
+	$(CC) $(C_FLAGS) $^ $(M_FLAGS) $(INCS) -o $(NAME) -L $(MLX_DIR) -lmlx -lm -lbsd -lX11 -lXext
 
 # Clean object files
 clean:

@@ -99,8 +99,8 @@ void img_draw_background(t_data *data)
             // Check if the current pixel is above or at the middle of the canvas
                 // Draw the pixel with the ceiling texture color
                 // Draw the pixel with the floor texture color
-                data->textures.ceiling_color = 0x00FF0000;
-                data->textures.floor_color = 0x000000FF;
+                // data->textures.ceiling_color = 0x00FF0000;
+                // data->textures.floor_color = 0x000000FF;
             if (current_position.y <= HEIGHT / 2)
                 img_draw_pixel(&data->ray_to_draw, current_position.x, current_position.y, data->textures.ceiling_color);
             else

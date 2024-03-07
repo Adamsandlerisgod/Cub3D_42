@@ -24,6 +24,7 @@ all the bytes in the allocated memory block to zero.
 */
 
 #include <stdlib.h>
+#include <limits.h>
 
 void	ft_bzero(void *s, size_t n)
 {
@@ -35,7 +36,7 @@ void	*ft_calloc(size_t count, size_t size)
 {
 	char	*p;
 
-	if (count == SIZE_MAX || size == SIZE_MAX)
+	if (count == UINT_MAX || size == UINT_MAX)
 		return (NULL);
 	p = (void *)malloc(count * size);
 	if (p == NULL)

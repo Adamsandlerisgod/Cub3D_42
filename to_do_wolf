@@ -100,3 +100,10 @@ The multiplication by cos(ray_angle - data->face_ang) is the perspective
   distance and the players viewing angle.
 
 11. 
+
+
+FInal Stretch
+-Clean up all the code, remove all the print statements, and make sure the code is sexy
+- All memory should be freed by exit program
+- Make sure the program is normed
+- Make the ceiling and floor color work, no path for floor and ceiling just the color.
