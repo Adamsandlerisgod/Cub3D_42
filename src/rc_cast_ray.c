@@ -6,7 +6,7 @@
 /*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 15:11:17 by whendrik          #+#    #+#             */
-/*   Updated: 2024/03/07 17:09:34 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:20:01 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static void	values_for_texture(t_data *data, t_ray *ray)
 			ray->wall_txt = data->textures.we;
 		else
 			ray->wall_txt = data->textures.ea;
-		printf("we here\n");
 			
 	}
 	cal_wall_hit_x(ray, wall_hit);

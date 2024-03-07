@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_check_grid.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
+/*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 20:57:19 by justindaly        #+#    #+#             */
-/*   Updated: 2024/02/23 19:26:46 by jdaly            ###   ########.fr       */
+/*   Updated: 2024/03/07 18:58:43 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ int	check_grid(t_mapinfo *info)
 	}
 	if (!is_valid_player_pos(info))
 		return (err_msg(NULL, "invalid player position", ERR_GRID));
+	info->grid[info->p_start_y][info->p_start_x] = '0';
 	return (SUCCESS);
 }
