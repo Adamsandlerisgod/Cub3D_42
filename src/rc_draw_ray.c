@@ -6,7 +6,7 @@
 /*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:36:36 by whendrik          #+#    #+#             */
-/*   Updated: 2024/03/06 22:28:10 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:00:58 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,16 @@ int draw_ray(t_data *data)
 {
 	int x;
 	t_ray	rays_to_cast;
-	//x and y start position
-	// double posX = data->mapinfo.p_start_x;
-	// double posY = data->mapinfo.p_start_y;
+	
 	ft_memset(&rays_to_cast, 0, sizeof(t_ray));
 	rays_to_cast.step_angle = (FOV * 2)/ WIDTH;
-
 	x = 0;
 	while (x < WIDTH)
 	{
 		ray_cast(data, &rays_to_cast, x);
-		printf("ray_cast\n");
-		// Draw the rays and walls
 		draw_walls_ray(&data->ray_to_draw, (t_coor_int){x, (HEIGHT - rays_to_cast.wall_height) / 2}, 
-				(t_coor_int){x, (HEIGHT + rays_to_cast.wall_height) / 2}, rays_to_cast.wall_txt);
+				(t_coor_int){rays_to_cast.wall_hit_x, (HEIGHT + rays_to_cast.wall_height) / 2},
+				 rays_to_cast.wall_txt);
 		x++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:04:19 by whendrik          #+#    #+#             */
-/*   Updated: 2024/03/06 22:34:15 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:17:48 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,4 @@ int main(int ac, char **av)
 	mlx_loop_hook(data.mlx.mlx, main_loop, &data);
 	mlx_loop(data.mlx.mlx);
 }
-//Create a function to init avatar position and direction properly and as a flaot
+//Create a function to init avatar position and direction properly and as a float

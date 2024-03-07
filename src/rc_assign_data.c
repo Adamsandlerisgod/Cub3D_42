@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rc_init_data.c                                     :+:      :+:    :+:   */
+/*   rc_assign_data.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:47:14 by whendrik          #+#    #+#             */
-/*   Updated: 2024/03/06 21:34:29 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/03/07 16:10:02 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ bool	assign_data(t_data *data, t_mapinfo *map)
 	data->ray_to_draw.width = WIDTH;
 	data->ray_to_draw.height = HEIGHT;
 	data->map = map->map;
-	data->avatar_pos.x = ((data->ray_to_draw.width/(map->width)) * map->p_start_x);
-	data->avatar_pos.y = ((data->ray_to_draw.height/(map->height)) * map->p_start_y);
+	data->avatar_pos.x = map->p_start_x + 0.49;
+	data->avatar_pos.y = map->p_start_y + 0.49;
 	assign_direction_hero(data, map->p_start_o);
 	return (TRUE);
 }

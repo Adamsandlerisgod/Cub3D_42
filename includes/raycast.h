@@ -6,7 +6,7 @@
 /*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:48:37 by whendrik          #+#    #+#             */
-/*   Updated: 2024/03/06 21:32:44 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/03/07 16:10:37 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ typedef struct s_keypress
 typedef struct s_data
 {
 	t_mlx		mlx;
-	t_coor_int	avatar_pos;
+	t_coor_db	avatar_pos;
 	t_mapinfo	mapinfo;
 	double		facing_angle;
 	t_textures	textures;
