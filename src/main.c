@@ -6,7 +6,7 @@
 /*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:04:19 by whendrik          #+#    #+#             */
-/*   Updated: 2024/03/06 21:03:33 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:17:48 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,31 @@ int	kill_program(t_data *data)
 	return (0);
 }
 
+static void	init_texture(t_textures *texture)
+{
+	texture->no.img = NULL;
+	texture->so.img = NULL;
+	texture->we.img = NULL;
+	texture->ea.img = NULL;
+	texture->floor_color = 0;
+	texture->ceiling_color = 0;
+}
+
+void init_data(t_data *data)
+{
+	data->mlx.mlx = NULL;
+	data->mlx.mlx_win = NULL;
+	data->ray_to_draw.img = NULL;
+	data->map = NULL;
+	init_texture(&data->textures);
+	data->avatar_pos.x = -1;
+	data->avatar_pos.y = -1;
+	data->facing_angle = -1;
+}
+
 bool	init_program(t_data *data, t_mapinfo *mapinfo)
 {
+	init_data(data);
 	data->mlx.mlx = mlx_init();
 	if (data->mlx.mlx == NULL)
 		return (FALSE);
@@ -44,8 +67,7 @@ bool	init_program(t_data *data, t_mapinfo *mapinfo)
 		return (FALSE);
 	if (!(init_img(&data->mlx.mlx, &data->ray_to_draw, WIDTH, HEIGHT)))
 		return (FALSE);
-	printf("path_no(initprogram) = %s\n", mapinfo->no_path);
-	if (!(init_assign_data(data, mapinfo)))
+	if (!(assign_data(data, mapinfo)))
 		return(err_msg("", "Failed to assign data", 0), 0);
 	mlx_hook(data->mlx.mlx_win, 17, 0, kill_program, data);
 	return (TRUE);
@@ -54,7 +76,9 @@ bool	init_program(t_data *data, t_mapinfo *mapinfo)
 int main_loop(t_data *data)
 {
 	//move avatar function
+	printf("main loop\n");
 	img_draw_background(data);
+	printf("draw background\n");
 	draw_ray(data);
 	mlx_clear_window(data->mlx.mlx, data->mlx.mlx_win);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.mlx_win,
@@ -75,8 +99,11 @@ int main(int ac, char **av)
 		return (0);
 	if (!(init_program(&data, &mapinfo)))
 		return(err_msg("" ,"Failed to initialize program", 0), 0);
+	printf("init program\n");
 	mlx_hook(data.mlx.mlx_win, 2, 1L << 0, key_press, &data);
 	mlx_hook(data.mlx.mlx_win, 3, 1L << 1, key_release, &data);
+	printf("post-key press/release\n");
 	mlx_loop_hook(data.mlx.mlx, main_loop, &data);
 	mlx_loop(data.mlx.mlx);
 }
+//Create a function to init avatar position and direction properly and as a float

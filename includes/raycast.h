@@ -6,7 +6,7 @@
 /*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:48:37 by whendrik          #+#    #+#             */
-/*   Updated: 2024/03/06 20:47:30 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/03/07 16:10:37 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ typedef struct s_keypress
 typedef struct s_data
 {
 	t_mlx		mlx;
-	t_coor_int	avatar_pos;
+	t_coor_db	avatar_pos;
 	t_mapinfo	mapinfo;
 	double		facing_angle;
 	t_textures	textures;
@@ -202,7 +202,8 @@ int		check_grid(t_mapinfo *mapinfo);
 int		check_walls(t_mapinfo *mapinfo);
 
 /*Initialization*/
-bool	init_assign_data(t_data *data, t_mapinfo *map);
+bool	assign_data(t_data *data, t_mapinfo *map);
+void	init_data(t_data *data);
 bool	init_program(t_data *data, t_mapinfo *map);
 
 /*KEY PRESS*/
