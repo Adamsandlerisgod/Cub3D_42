@@ -12,7 +12,6 @@
 
 #include "../includes/raycast.h"
 
-//check 1
 char	*get_raw(char *file)
 {
 	int		fd;
@@ -62,9 +61,9 @@ void	free_array(char **array)
 
 int	check_double_nl(t_mapinfo *mapinfo)
 {
-	char *map_key;
-	char *map_bgn;
-	char *result;
+	char	*map_key;
+	char	*map_bgn;
+	char	*result;
 
 	map_key = mapinfo->map_bgn;
 	map_bgn = ft_strnstr(mapinfo->rawdata, map_key, MAX_MAPSIZE);
@@ -88,12 +87,12 @@ int	validate_cub(int argc, char **argv, t_mapinfo *m_info)
 	if (!m_info->rawdata)
 		return (ERR_FILE);
 	printf("mapinfo->raw:\n%s\n-------------------\n", m_info->rawdata);
-	if (check_texture_info(m_info) == ERR_INFO) //check 2: extract texture info, check all info is there
+	if (check_texture_info(m_info) == ERR_INFO)
 		return (free_mapinfo(m_info), ERR_INFO);
-	init_grid(m_info); //initialize grid standardizing width
-	if (check_grid(m_info) == ERR_GRID) //check map chars and player start
+	init_grid(m_info);
+	if (check_grid(m_info) == ERR_GRID)
 		return (free_mapinfo(m_info), ERR_GRID);
-	if (check_walls(m_info) == ERR_WALL) //flood fill to make sure walls are closed
+	if (check_walls(m_info) == ERR_WALL)
 		return (free_mapinfo(m_info), ERR_WALL);
 	if (check_double_nl(m_info) == ERR_MAP)
 		return (free_mapinfo(m_info), ERR_MAP);

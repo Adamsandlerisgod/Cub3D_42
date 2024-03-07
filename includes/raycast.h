@@ -188,6 +188,12 @@ int		is_valid_color_code(char *color);
 int		is_valid_texture_path(char type, char *path);
 int		is_duplicate_type(t_mapinfo *info, char type);
 
+/* Flood Fill Utils */
+int		is_fillable_up(t_mapinfo *mapinfo, int x, int y);
+int		is_fillable_down(t_mapinfo *mapinfo, int x, int y);
+int		is_fillable_right(t_mapinfo *mapinfo, int x, int y);
+int		is_fillable_left(t_mapinfo *mapinfo, int x, int y);
+
 /*Parsing Checks*/
 int		check_file(char *arg);
 int		check_texture_info(t_mapinfo *m_info);

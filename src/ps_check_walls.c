@@ -6,12 +6,11 @@
 /*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:02:27 by jdaly             #+#    #+#             */
-/*   Updated: 2024/02/23 19:27:32 by jdaly            ###   ########.fr       */
+/*   Updated: 2024/03/06 17:01:33 by jdaly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/raycast.h"
-
 
 char	**dup_array(char **array)
 {
@@ -33,26 +32,6 @@ char	**dup_array(char **array)
 	}
 	dup[i] = NULL;
 	return (dup);
-}
-
-int	is_fillable_up(t_mapinfo *mapinfo, int x, int y)
-{
-	return (mapinfo->flood[y - 1][x] != '1' && mapinfo->flood[y - 1][x] != '*');
-}
-
-int	is_fillable_down(t_mapinfo *mapinfo, int x, int y)
-{
-	return (mapinfo->flood[y + 1][x] != '1' && mapinfo->flood[y + 1][x] != '*');
-}
-
-int	is_fillable_right(t_mapinfo *mapinfo, int x, int y)
-{
-	return (mapinfo->flood[y][x + 1] != '1' && mapinfo->flood[y][x + 1] != '*');
-}
-
-int	is_fillable_left(t_mapinfo *mapinfo, int x, int y)
-{
-	return (mapinfo->flood[y][x - 1] != '1' && mapinfo->flood[y][x - 1] != '*');
 }
 
 void	check_map_border(t_mapinfo *info, int x, int y)
@@ -90,12 +69,11 @@ void	flood_fill(t_mapinfo *info, int x, int y)
 
 int	check_walls(t_mapinfo *mapinfo)
 {
-	if (!(mapinfo->width > 2 && mapinfo->height > 2))//check min size
+	if (!(mapinfo->width > 2 && mapinfo->height > 2))
 		return (err_msg(NULL, "invalid map size", ERR_WALL));
-	mapinfo->flood = dup_array(mapinfo->grid); //dup grid array
+	mapinfo->flood = dup_array(mapinfo->grid);
 	flood_fill(mapinfo, mapinfo->p_start_x, mapinfo->p_start_y);
 	if (mapinfo->closed == FALSE)
 		return (err_msg(NULL, "map not closed by wall", ERR_WALL));
-	//necessary to free flood array?
 	return (SUCCESS);
 }
