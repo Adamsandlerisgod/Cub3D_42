@@ -6,7 +6,7 @@
 /*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:47:14 by whendrik          #+#    #+#             */
-/*   Updated: 2024/03/06 20:54:14 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/03/06 21:34:29 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,7 @@ static void	assign_direction_hero(t_data *data, char dir)
 		data->facing_angle = PI;
 }
 
-static void	init_texture(t_textures *texture)
-{
-	texture->no.img = NULL;
-	texture->so.img = NULL;
-	texture->we.img = NULL;
-	texture->ea.img = NULL;
-	texture->floor_color = 0;
-	texture->ceiling_color = 0;
-}
 
-static void init_data(t_data *data)
-{
-	data->mlx.mlx = NULL;
-	data->mlx.mlx_win = NULL;
-	data->ray_to_draw.img = NULL;
-	data->map = NULL;
-	init_texture(&data->textures);
-	data->avatar_pos.x = -1;
-	data->avatar_pos.y = -1;
-	data->facing_angle = -1;
-}
 
 t_img	text_assign(t_data *data, char *path, int width, int height)
 {
@@ -52,13 +32,10 @@ t_img	text_assign(t_data *data, char *path, int width, int height)
 
 	texture.width = width;
 	texture.height = height;
-	printf("path = %s\n", path);
 	texture.img = mlx_xpm_file_to_image(data->mlx.mlx, path,
 		&texture.width, &texture.height);
-	printf("texture.img = %p\n", texture.img);
 	if (texture.img == NULL)
 		return (texture);
-	printf("texture.img = %p\n", texture.img);
 	texture.addr = mlx_get_data_addr(texture.img, &texture.bits_per_pixel,
 		&texture.line_length, &texture.endian);
 	return (texture);
@@ -81,14 +58,11 @@ static bool assign_texture(t_data *data, t_mapinfo *map)
 	return (TRUE);
 }	
 
-bool	init_assign_data(t_data *data, t_mapinfo *map)
+bool	assign_data(t_data *data, t_mapinfo *map)
 {
 
-	init_data(data);
-	printf("here\n");
 	if (assign_texture(data, map) == FALSE)
 		return (FALSE);
-	printf("thehere\n");
 	data->mlx.win_width = WIDTH;
 	data->mlx.win_height = HEIGHT;
 	data->ray_to_draw.width = WIDTH;

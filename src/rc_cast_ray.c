@@ -6,7 +6,7 @@
 /*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 15:11:17 by whendrik          #+#    #+#             */
-/*   Updated: 2024/03/05 21:25:16 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/03/06 22:30:06 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,7 @@ static void	values_for_texture(t_data *data, t_ray *ray)
 
 
 
-static void	ray_cast_init(t_data *data, t_ray *rays)
-{
-	
-	rays->map.x = (int)data->avatar_pos.x;
-	rays->map.y = (int)data->avatar_pos.y;
-	rays->delta.x = fabs(1 / rays->dir.x);
-	rays->delta.y = fabs(1 / rays->dir.y);
-	
-}
+
 
 static void	dda_algo(t_data *data, t_ray *rays)
 {
@@ -81,6 +73,41 @@ static void	dda_algo(t_data *data, t_ray *rays)
 	}
 }
 
+static void set_direction_of_step(t_data *data, t_ray *rays)
+{
+  if (rays->dir.x < 0)
+	{
+		rays->step.x = -1;
+		rays->dist_to_side.x = (data->avatar_pos.x - rays->map.x) * rays->delta.x;
+	}
+	else
+	{
+		rays->step.x = 1;
+		rays->dist_to_side.x = (rays->map.x + 1.0 - data->avatar_pos.x) * rays->delta.x;
+	}
+	if (rays->dir.y < 0)
+	{
+		rays->step.y = -1;
+		rays->dist_to_side.y = (data->avatar_pos.y - rays->map.y) * rays->delta.y;
+	}
+	else
+	{
+		rays->step.y = 1;
+		rays->dist_to_side.y = (rays->map.y + 1.0 - data->avatar_pos.y) * rays->delta.y;
+	}
+}
+
+
+static void	init_ray_cast(t_data *data, t_ray *rays)
+{
+	set_direction_of_step(data, rays);
+	rays->map.x = (int)data->avatar_pos.x;
+	rays->map.y = (int)data->avatar_pos.y;
+	rays->delta.x = fabs(1 / rays->dir.x);
+	rays->delta.y = fabs(1 / rays->dir.y);
+	
+}
+
 void	ray_cast(t_data *data, t_ray *rays, int x)
 {
 	double	ray_angle;
@@ -88,9 +115,17 @@ void	ray_cast(t_data *data, t_ray *rays, int x)
 	ray_angle = data->facing_angle - FOV + x * rays->step_angle;
 	rays->dir.x = -1 * cos(ray_angle);
 	rays->dir.y = -1 * sin(ray_angle);
-  	ray_cast_init(data, rays);
+	printf("ray_angle: %f\n", ray_angle);
+	printf("rays->step_angle: %f\n", rays->step_angle);
+	printf("data->avatar_pos.x: %d\n", data->avatar_pos.x);
+	printf("data->avatar_pos.y: %d\n", data->avatar_pos.y);
+	exit(0);
+  	init_ray_cast(data, rays);
+	printf("init_ray_cast\n");
 	dda_algo(data, rays);
+	printf("dda_algo\n");
 	values_for_texture(data, rays);
+	printf("values_for_texture\n");
 	rays->perp_dist *= cos(ray_angle - data->facing_angle);
 	rays->wall_height = (int)(HEIGHT / rays->perp_dist);
 }

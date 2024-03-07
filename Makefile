@@ -6,7 +6,7 @@
 #    By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/30 16:08:21 by whendrik          #+#    #+#              #
-#    Updated: 2024/03/06 16:44:42 by whendrik         ###   ########.fr        #
+#    Updated: 2024/03/06 21:35:03 by whendrik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ NAME = Cub3D
 LIBFT = libft/libft.a
 MLX = mlx/libmlx.a
 SRC_DIR = src
-SRC_FILES = main.c  key_press.c rc_draw_map.c rc_init_data.c rc_draw_ray.c rc_draw_utils.c rc_cast_ray.c\
+SRC_FILES = main.c  key_press.c rc_draw_map.c rc_assign_data.c rc_draw_ray.c rc_draw_utils.c rc_cast_ray.c\
 		ps_check_args.c ps_check_grid.c ps_check_textures.c ps_check_walls.c \
 		ps_error.c ps_init_grid.c ps_init_mapinfo.c ps_main_justin.c \
 		ps_texture_utils.c ps_validate_cubfile.c \
