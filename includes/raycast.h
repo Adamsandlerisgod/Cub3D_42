@@ -6,7 +6,7 @@
 /*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:48:37 by whendrik          #+#    #+#             */
-/*   Updated: 2024/03/07 16:10:37 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:04:08 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 # define FOV 0.4235987756
 
 /* movement speed */
-# define SPEED 0.05
+# define SPEED 0.24
 
 # define SUCCESS 0
 # define FAILURE 1
@@ -212,14 +212,10 @@ int	key_release(int key, t_data *data);
 int	kill_program(t_data *data);
 
 /*Draw Functions*/
-void	draw_grid(t_img *img, int width, int height);
-// void	draw_grid_horizontal(t_img *img, int height);
-// void	draw_grid_vertical(t_img *img, int width);
-// void	draw_avatar(t_data *data);
-// int		draw_map(t_data	*data);
-int draw_ray(t_data *data);
-void img_draw_background(t_data *data);
-int	get_pixel_color(t_img *img, int x, int y);
+void	move_avatar(t_data *data);
+int 	draw_ray(t_data *data);
+void 	img_draw_background(t_data *data);
+int		get_pixel_color(t_img *img, int x, int y);
 void	img_draw_pixel(t_img *img, int x, int y, unsigned int color);
 void	ray_cast(t_data *data, t_ray *rays, int x);
 

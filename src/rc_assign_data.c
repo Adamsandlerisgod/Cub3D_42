@@ -6,7 +6,7 @@
 /*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:47:14 by whendrik          #+#    #+#             */
-/*   Updated: 2024/03/07 16:10:02 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:56:46 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ bool	assign_data(t_data *data, t_mapinfo *map)
 	data->mlx.win_height = HEIGHT;
 	data->ray_to_draw.width = WIDTH;
 	data->ray_to_draw.height = HEIGHT;
-	data->map = map->map;
+	data->map = map->grid;
 	data->avatar_pos.x = map->p_start_x + 0.49;
 	data->avatar_pos.y = map->p_start_y + 0.49;
 	assign_direction_hero(data, map->p_start_o);
