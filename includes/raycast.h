@@ -193,6 +193,7 @@ int		is_valid_texture_type(char *mapdir);
 int		is_valid_color_code(char *color);
 int		is_valid_texture_path(char type, char *path);
 int		is_duplicate_type(t_mapinfo *info, char type);
+int		check_size(t_mapinfo *mapinfo);
 
 /* Flood Fill Utils */
 int		is_fillable_up(t_mapinfo *mapinfo, int x, int y);
