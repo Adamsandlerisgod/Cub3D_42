@@ -12,6 +12,13 @@
 
 #include "../includes/raycast.h"
 
+int	kill_program(t_data *data)
+{
+	(void)data;
+	exit(0);
+	return (0);
+}
+
 int	key_release(int key, t_data *data)
 {
 	if (key == KEY_W || key == KEY_UP)

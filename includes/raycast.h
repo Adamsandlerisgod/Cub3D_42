@@ -44,10 +44,9 @@
 # define WIDTH 1024
 /*Half (FOV) angle*/
 # define FOV 0.4235987756
-// # define FOV 0.78539816339
 
 /* movement speed */
-# define SPEED 0.4
+# define SPEED 0.125
 
 # define SUCCESS 0
 # define FAILURE 1
@@ -209,9 +208,9 @@ int		check_grid(t_mapinfo *mapinfo);
 int		check_walls(t_mapinfo *mapinfo);
 
 /*Initialization*/
-bool	assign_data(t_data *data, t_mapinfo *map);
-void	init_data(t_data *data, t_mapinfo *mapinfo);
 bool	init_program(t_data *data, t_mapinfo *map);
+bool	assign_data(t_data *data, t_mapinfo *map);
+void	assign_ray_cast(t_data *data, t_ray *rays);
 
 /*KEY PRESS and MOUSE CLICK*/
 int	mouse_press(int click, int x, int y, t_data *data);
