@@ -91,4 +91,3 @@ int	is_valid_texture_path(char type, char *path)
 		return (FAILURE);
 	return (SUCCESS);
 }
-

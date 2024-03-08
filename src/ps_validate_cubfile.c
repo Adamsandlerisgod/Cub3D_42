@@ -88,6 +88,8 @@ int	validate_cub(int argc, char **argv, t_mapinfo *m_info)
 	if (check_texture_info(m_info) == ERR_INFO)
 		return (free_mapinfo(m_info), ERR_INFO);
 	init_grid(m_info);
+	if (check_size(m_info) == ERR_GRID)
+		return (free_mapinfo(m_info), ERR_GRID);
 	if (check_grid(m_info) == ERR_GRID)
 		return (free_mapinfo(m_info), ERR_GRID);
 	if (check_walls(m_info) == ERR_WALL)
@@ -95,6 +97,5 @@ int	validate_cub(int argc, char **argv, t_mapinfo *m_info)
 	if (check_double_nl(m_info) == ERR_MAP)
 		return (free_mapinfo(m_info), ERR_MAP);
 	print_mapinfo(m_info);
-	// free_mapinfo(m_info); (Must be freed at a different place)
 	return (SUCCESS);
 }

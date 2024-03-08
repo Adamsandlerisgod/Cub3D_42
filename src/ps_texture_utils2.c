@@ -21,3 +21,9 @@ int	is_duplicate_type(t_mapinfo *info, char type)
 		|| (type == 'F' && info->f_color_str)
 		|| (type == 'C' && info->c_color_str));
 }
+
+int	check_size(t_mapinfo *mapinfo)
+{
+	if (info->height > 65 || info->width > 90)
+		return (err_msg(NULL, "map too large", ERR_GRID));
+}

@@ -35,8 +35,6 @@ int	check_grid(t_mapinfo *info)
 	int	i;
 	int	j;
 
-	if (info->height > 65 || info->width > 90)
-		return (err_msg(NULL, "map too large", ERR_GRID));
 	i = -1;
 	while (++i < info->height)
 	{
@@ -47,7 +45,6 @@ int	check_grid(t_mapinfo *info)
 				return (err_msg(info->grid[i], "invalid map char", ERR_GRID));
 			else if (is_player_start(info->grid[i][j]))
 			{
-				printf("players start = %c\n", info->grid[i][j]);
 				if (info->p_start_o != '-')
 					return (err_msg(NULL, "dup player start pos", ERR_GRID));
 				info->p_start_x = j;
