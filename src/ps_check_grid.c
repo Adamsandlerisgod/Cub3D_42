@@ -35,6 +35,8 @@ int	check_grid(t_mapinfo *info)
 	int	i;
 	int	j;
 
+	if (info->height > 65 || info->width > 90)
+		return (err_msg(NULL, "map too large", ERR_GRID));
 	i = -1;
 	while (++i < info->height)
 	{
