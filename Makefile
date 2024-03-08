@@ -25,7 +25,8 @@ NAME = Cub3D
 LIBFT = libft/libft.a
 MLX = mlx_linux/libmlx.a
 SRC_DIR = src
-SRC_FILES = main.c  key_press.c  move_avatar.c rc_draw_map.c rc_assign_data.c rc_draw_ray.c rc_draw_utils.c rc_cast_ray.c\
+SRC_FILES = main.c  key_press.c  move_avatar.c rc_draw_map.c rc_assign_data.c rc_draw_ray.c \
+		rc_init_program.c rc_draw_utils.c rc_assign_raycast.c rc_cast_ray.c\
 		ps_check_args.c ps_check_grid.c ps_check_textures.c ps_check_walls.c \
 		ps_error.c ps_floodfill_utils.c ps_init_grid.c ps_init_mapinfo.c ps_main_justin.c \
 		ps_texture_utils.c ps_texture_utils2.c ps_validate_cubfile.c \

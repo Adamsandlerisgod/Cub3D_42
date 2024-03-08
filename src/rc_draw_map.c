@@ -12,36 +12,12 @@
 
 #include "../includes/raycast.h"
 
-// // void	draw_grid_vertical(t_img *img, int width)
-// // {
-// // 		for (int j = 0; img->width > (img->width/width) * j; j++)
-// // 		{
-// // 			for (int k = 0; k < img->height; k++)
-// // 				img_draw_pixel(img, (img->width/width) * j, k, 0x000000FF);
-// // 		}
-// // }
-// // void	draw_grid_horizontal(t_img *img, int height)
-// // {
-// // 		for (int j = 0; img->height > (img->height/height) * j; j++)
-// // 		{
-// // 			for (int k = 0; k < img->width; k++)
-// // 				img_draw_pixel(img, k, (img->height/height) * j, 0x000000FF);
-// // 		}
-// // }
-
-// // void	draw_grid(t_img *img, int width, int height)
-// // {
-// // 	draw_grid_horizontal(img, height);
-// // 	draw_grid_vertical(img, width);
-// // }
-
 void fill_square(t_data *data, int color, int i, int j) 
 {
     int k;
     int l;
 
     k = 0;
-    l = 0;
     while(k < data->mini_map_scale)
      {
         l = 0;
@@ -62,14 +38,15 @@ int draw_mini_map(t_data *data) {
     int y;
 
     x = 0;
-    while (data->map[x] != NULL) { // Loop through each row in the map
+    while (data->map[x] != NULL) 
+    {
         y = 0;
-        while (data->map[x][y] != '\0') { // Loop through each column in the current row
-            if (data->map[x][y] == '1') {
-                color = 0x00FF0000; // Red color for walls ('1')
-            } else {
-                color = 0x0000FF; // Blue color for empty space
-            }
+        while (data->map[x][y] != '\0') 
+        {
+            if (data->map[x][y] == '1') 
+                color = 0x00FF0000;
+            else
+                color = 0x0000FF;
             fill_square(data, color, y, x);
             y++;
         }

@@ -19,14 +19,14 @@ static void	assign_direction_hero(t_data *data, char dir)
 	else if (dir == 'S')
 		data->facing_angle = 3 * PI / 2;
 	else if (dir == 'E')
-		data->facing_angle = 0;
-	else if (dir == 'W')
 		data->facing_angle = PI;
+	else if (dir == 'W')
+		data->facing_angle = 0;
 }
 
 
 
-t_img	text_assign(t_data *data, char *path, int width, int height)
+static t_img	text_assign(t_data *data, char *path, int width, int height)
 {
 	t_img	texture;
 
