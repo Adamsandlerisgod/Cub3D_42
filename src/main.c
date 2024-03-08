@@ -107,6 +107,8 @@ int main(int ac, char **av)
 		return(err_msg("" ,"Failed to initialize program", 0), 0);
 	mlx_hook(data.mlx.mlx_win, 2, 1L << 0, key_press, &data);
 	mlx_hook(data.mlx.mlx_win, 3, 1L << 1, key_release, &data);
+	mlx_hook(data.mlx.mlx_win, 4, 1L << 2, mouse_press, &data);
+	mlx_hook(data.mlx.mlx_win, 5, 1L << 3, mouse_release, &data); 
 	mlx_loop_hook(data.mlx.mlx, main_loop, &data);
 	mlx_loop(data.mlx.mlx);
 }

@@ -30,8 +30,6 @@ void static	move(t_data *data, double angle)
 	else if (data->map[(int)(data->avatar_pos.y + dir.y * SPEED)]
 		[(int)(data->avatar_pos.x)] == '0')
 		data->avatar_pos.y += dir.y * SPEED / 2;
-    else
-        printf("You can't move there\n");
 }
 
 void	move_avatar(t_data *data)
@@ -44,9 +42,9 @@ void	move_avatar(t_data *data)
 		move(data, data->facing_angle + PI);
 	if (data->key.d)
 		move(data, data->facing_angle + PI / 2);
-	if (data->key.r)
+	if (data->key.r || data->key.right_click)
 		data->facing_angle += 0.02;
-	if (data->key.l)
+	if (data->key.l || data->key.left_click)
 		data->facing_angle -= 0.02;
 	if (data->facing_angle >= 2 * PI)
 		data->facing_angle -= 2 * PI;

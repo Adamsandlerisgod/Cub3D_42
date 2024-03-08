@@ -34,6 +34,8 @@
 # define KEY_S       115
 # define KEY_D       100
 # define KEY_W       119
+# define LEFT_CLICK  1
+# define RIGHT_CLICK 3
 
 # define PI	3.14159265358979
 
@@ -43,7 +45,7 @@
 # define FOV 0.4235987756
 
 /* movement speed */
-# define SPEED 0.24
+# define SPEED 0.1
 
 # define SUCCESS 0
 # define FAILURE 1
@@ -153,6 +155,8 @@ typedef struct s_keypress
 	bool	d;
 	bool	r;
 	bool	l;
+	bool	left_click;
+	bool	right_click;
 }	t_keypress;
 
 typedef struct s_data
@@ -206,7 +210,9 @@ bool	assign_data(t_data *data, t_mapinfo *map);
 void	init_data(t_data *data, t_mapinfo *mapinfo);
 bool	init_program(t_data *data, t_mapinfo *map);
 
-/*KEY PRESS*/
+/*KEY PRESS and MOUSE CLICK*/
+int	mouse_press(int click, int x, int y, t_data *data);
+int mouse_release(int click, int x, int y, t_data *data);
 int	key_press(int key, t_data *data);
 int	key_release(int key, t_data *data);
 int	kill_program(t_data *data);
