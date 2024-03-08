@@ -6,7 +6,7 @@
 /*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:48:37 by whendrik          #+#    #+#             */
-/*   Updated: 2024/03/07 19:04:08 by whendrik         ###   ########.fr       */
+/*   Updated: 2024/03/08 19:52:02 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,17 +213,17 @@ bool	assign_data(t_data *data, t_mapinfo *map);
 void	assign_ray_cast(t_data *data, t_ray *rays);
 
 /*KEY PRESS and MOUSE CLICK*/
-int	mouse_press(int click, int x, int y, t_data *data);
-int mouse_release(int click, int x, int y, t_data *data);
-int	key_press(int key, t_data *data);
-int	key_release(int key, t_data *data);
-int	kill_program(t_data *data);
+int		mouse_press(int click, int x, int y, t_data *data);
+int		mouse_release(int click, int x, int y, t_data *data);
+int		key_press(int key, t_data *data);
+int		key_release(int key, t_data *data);
+int		kill_program(t_data *data);
 
 /*Draw Functions*/
 void	move_avatar(t_data *data);
-int 	draw_ray(t_data *data);
-void 	img_draw_background(t_data *data);
-int draw_mini_map(t_data *data);
+int		draw_ray(t_data *data);
+void	img_draw_background(t_data *data);
+int		draw_mini_map(t_data *data);
 int		get_pixel_color(t_img *img, int x, int y);
 void	img_draw_pixel(t_img *img, int x, int y, unsigned int color);
 void	ray_cast(t_data *data, t_ray *rays, int x);
