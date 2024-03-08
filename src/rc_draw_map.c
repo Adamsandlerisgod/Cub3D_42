@@ -35,82 +35,66 @@
 // // 	draw_grid_vertical(img, width);
 // // }
 
-// void	fill_square( t_img *img, int width, int height, int color, int i, int j)
-// {
-// 	printf("we are in fill square|| width = %d || height = %d \n", width, height);
-// 	for (int k = 0; width > k; k++)
-// 	{
-// 		for (int l = 0; l < height; l++)
-// 			img_draw_pixel(img, (width * i) + k, (j * height) + l, color);
-// 	}
-// }
+void fill_square(t_img *img, int color, int i, int j) 
+{
+    int k;
+    int l;
+
+    k = 0;
+    l = 0;
+    while(k < 10)
+     {
+        l = 0;
+        while(l < 10)
+        {
+            img_draw_pixel(img, (i * 10) + k, (j * 10) + l, color);
+            l++;
+        }
+        k++;
+    }
+}
 
 
+int draw_mini_map(t_data *data) {
+    int color;
+    int x;
+    int y;
+    x = 0;
 
-// int		draw_map(t_data	*data)
-// {
-// 	int mapX = 8;
-// 	int mapY = 8;
-// 	// int mapS = 64;
-// 	int x = 0;
-// 	int y = 0;
+    while (data->map[x] != NULL) { // Loop through each row in the map
+        y = 0;
+        while (data->map[x][y] != '\0') { // Loop through each column in the current row
+            if (data->map[x][y] == '1') {
+                color = 0x00FF0000; // Red color for walls ('1')
+            } else {
+                color = 0x0000FF; // Blue color for empty space
+            }
+            fill_square(&data->ray_to_draw, color, y, x);
+            y++;
+        }
+        x++;
+    }
+    fill_square(&data->ray_to_draw, 0x00FF00, (int)data->avatar_pos.x , (int)data->avatar_pos.y);
+    return (0);
+}
 
-
-// 	char **map = data->map;
-
-// 	printf("We are here\n");
-// 	while (x < mapX)
-// 	{
-// 		y = 0;
-// 		while (map[x][y] != '\0')
-// 		{
-// 			printf("coor map = (%d, %d) = %c\n", y , x, map[y][x]);
-// 			if (map[x][y] == '1')
-// 				fill_square(&data->img, data->img.width/mapX,
-// 					data->img.height/mapY, 0x00FF0000, y, x);
-// 			else
-// 				fill_square(&data->img, data->img.width/mapX,
-// 					data->img.height/mapY, 0x0000FF, y, x);
-// 			y++;
-// 		}
-// 		x++;	
-// 	}
-// 	return (0);
-// }
-
-// Draw the background on the canvas with ceiling and floor textures
 void img_draw_background(t_data *data)
 {
-    // Initialize variable to store the current position
     t_coor_int current_position;
 
-    // Set all bytes of the position variable to 0
     ft_memset(&current_position, 0, sizeof(current_position));
 
-    // Loop through each row of the canvas
     while (current_position.y < HEIGHT)
     {
-        // Initialize the position's x-coordinate to 0
         current_position.x = 0;
-
-        // Loop through each column of the canvas
         while (current_position.x < WIDTH)
         {
-            // Check if the current pixel is above or at the middle of the canvas
-                // Draw the pixel with the ceiling texture color
-                // Draw the pixel with the floor texture color
-                // data->textures.ceiling_color = 0x00FF0000;
-                // data->textures.floor_color = 0x000000FF;
             if (current_position.y <= HEIGHT / 2)
                 img_draw_pixel(&data->ray_to_draw, current_position.x, current_position.y, data->textures.ceiling_color);
             else
                 img_draw_pixel(&data->ray_to_draw, current_position.x, current_position.y, data->textures.floor_color);
-
-            // Move to the next column
             current_position.x++;
         }
-
-        // Move to the next row
         current_position.y++;
     }
 }
