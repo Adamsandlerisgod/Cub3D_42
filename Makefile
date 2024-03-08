@@ -6,7 +6,7 @@
 #    By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/30 16:08:21 by whendrik          #+#    #+#              #
-#    Updated: 2024/03/08 20:25:57 by whendrik         ###   ########.fr        #
+#    Updated: 2024/03/08 21:06:09 by whendrik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ RM = rm -rf
 AR = ar rc
 
 #Targlib name and dirs
-NAME = Cub3D
+NAME = cub3D
 LIBFT = libft/libft.a
 MLX = mlx_linux/libmlx.a
 SRC_DIR = src

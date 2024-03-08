@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_texture_utils2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdaly <jdaly@student.42.fr>                +#+  +:+       +#+        */
+/*   By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:30:07 by jdaly             #+#    #+#             */
-/*   Updated: 2024/03/06 19:30:55 by jdaly            ###   ########.fr       */
+/*   Updated: 2024/03/08 20:45:52 by whendrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ int	is_duplicate_type(t_mapinfo *info, char type)
 		|| (type == 'C' && info->c_color_str));
 }
 
-int	check_size(t_mapinfo *mapinfo)
+int	check_size(t_mapinfo *info)
 {
 	if (info->height > 65 || info->width > 90)
 		return (err_msg(NULL, "map too large", ERR_GRID));
+	return (SUCCESS);
 }

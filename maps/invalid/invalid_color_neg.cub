@@ -1,7 +1,7 @@
-NO ./maps/textures/path_to_north_texture
-SO ./maps/textures/path_to_south_texture
-EA ./maps/textures/path_to_east_texture
-WE ./maps/textures/path_to_west_texture
+NO ./maps/test_textures/north.xpm
+SO ./maps/test_textures/south.xpm
+EA ./maps/test_textures/east.xpm
+WE ./maps/test_textures/west.xpm
 C -250,255,255
 F 100,100,100
 

@@ -1,13 +1,11 @@
-NO ./maps/textures/path_to_north_texture
-SO ./maps/textures/path_to_south_texture
-EA ./maps/textures/path_to_east_texture
-WE ./maps/textures/path_to_west_texture
-C 250,255,255
 F 100,100,100
+SO ./textures/south.xpm
+WE ./textures/west.xpm
 
-1111111111111111111111111
-10000000000000000N1000001
-1111111111111111111111111
+EA ./textures/east.xpm
+C 250,255,255
+NO ./textures/north.xpm
+
 
 
 
