@@ -6,12 +6,12 @@
 #    By: whendrik <whendrik@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/30 16:08:21 by whendrik          #+#    #+#              #
-#    Updated: 2024/03/07 18:08:07 by whendrik         ###   ########.fr        #
+#    Updated: 2024/03/08 20:25:57 by whendrik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #FLAGS
-CC = clang
+CC = cc
 C_FLAGS = -Wall -Wextra -Werror -g -o3
 # M_FLAGS = -lmlx -lm -lbsd -lX11 -lXext
 # S_FLAGS = -g -fsanitize=address,undefined
