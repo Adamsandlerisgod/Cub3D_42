@@ -15,17 +15,17 @@
 int	key_release(int key, t_data *data)
 {
 	if (key == KEY_W || key == KEY_UP)
-		data->key.w = false;
+		data->key.w = FALSE;
 	else if (key == KEY_A)
-		data->key.a = false;
+		data->key.a = FALSE;
 	else if (key == KEY_S || key == KEY_DOWN)
-		data->key.s = false;
+		data->key.s = FALSE;
 	else if (key == KEY_D)
-		data->key.d = false;
+		data->key.d = FALSE;
 	else if (key == KEY_LEFT)
-		data->key.l = false;
+		data->key.l = FALSE;
 	else if (key == KEY_RIGHT)
-		data->key.r = false;
+		data->key.r = FALSE;
 	return (0);
 }
 
@@ -34,17 +34,38 @@ int	key_press(int key, t_data *data)
 	if (key == KEY_ESC)
 		kill_program(data);
 	if (key == KEY_W || key == KEY_UP)
-		data->key.w = true;
+		data->key.w = TRUE;
 	else if (key == KEY_A)
-		data->key.a = true;
+		data->key.a = TRUE;
 	else if (key == KEY_S || key == KEY_DOWN)
-		data->key.s = true;
+		data->key.s = TRUE;
 	else if (key == KEY_D)
-		data->key.d = true;
+		data->key.d = TRUE;
 	else if (key == KEY_LEFT)
-		data->key.l = true;
+		data->key.l = TRUE;
 	else if (key == KEY_RIGHT)
-		data->key.r = true;
-	printf("key_press %d\n", key);
+		data->key.r = TRUE;
+	return (0);
+}
+
+int	mouse_press(int click, int x, int y, t_data *data)
+{
+	x = y;
+	y = x;
+	if (click == LEFT_CLICK)
+		data->key.left_click = TRUE;
+	else if (click == RIGHT_CLICK)
+		data->key.right_click = TRUE;
+	return (0);
+}
+
+int	mouse_release(int click, int x, int y, t_data *data)
+{
+	x = y;
+	y = x;
+	if (click == LEFT_CLICK)
+		data->key.left_click = FALSE;
+	else if (click == RIGHT_CLICK)
+		data->key.right_click = FALSE;
 	return (0);
 }
