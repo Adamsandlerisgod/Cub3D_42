@@ -62,6 +62,4 @@ void	print_mapinfo(t_mapinfo *mapinfo)
 	print_array(mapinfo->map);
 	printf("=== grid ===\n");
 	print_array(mapinfo->grid);
-	printf("=== flood ===\n");
-	print_array(mapinfo->flood);
 }

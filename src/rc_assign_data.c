@@ -18,9 +18,9 @@ static void	assign_direction_hero(t_data *data, char dir)
 		data->facing_angle = PI / 2;
 	else if (dir == 'S')
 		data->facing_angle = 3 * PI / 2;
-	else if (dir == 'W')
-		data->facing_angle = 0;
 	else if (dir == 'E')
+		data->facing_angle = 0;
+	else if (dir == 'W')
 		data->facing_angle = PI;
 }
 

@@ -81,8 +81,6 @@ int	validate_cub(int argc, char **argv, t_mapinfo *m_info)
 		return (ERR_ARG);
 	printf("checked file\n");
 	init_mapinfo(m_info);
-	print_mapinfo(m_info);
-	printf("reading map...\n");
 	m_info->rawdata = get_raw(argv[1]);
 	if (!m_info->rawdata)
 		return (ERR_FILE);

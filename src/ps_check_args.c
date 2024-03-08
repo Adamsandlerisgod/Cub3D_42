@@ -17,7 +17,7 @@ static	int	is_dir(char *arg)
 {
 	int		fd;
 
-	fd = open(arg, O_DIRECTORY);
+	fd = open(arg, __O_DIRECTORY);
 	if (fd >= 0)
 	{
 		close(fd);

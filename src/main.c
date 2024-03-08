@@ -18,12 +18,10 @@ static bool	init_img(t_data *data, t_img *ray_to_draw, int width, int height)
 	ray_to_draw->img = mlx_new_image(data->mlx.mlx, WIDTH, HEIGHT);
 	if (ray_to_draw->img == NULL)
 		return (FALSE);
-	printf("init_img2\n");
 	ray_to_draw->addr = mlx_get_data_addr(ray_to_draw->img, &ray_to_draw->bits_per_pixel,
 			&ray_to_draw->line_length, &ray_to_draw->endian);
 	if (ray_to_draw->addr == NULL)
 		return (FALSE);
-	printf("init_img3\n");
 	ray_to_draw->width = width;
 	ray_to_draw->height = height;
 	return (TRUE);
@@ -56,25 +54,20 @@ void init_data(t_data *data, t_mapinfo *mapinfo)
 	data->avatar_pos.x = -1;
 	data->avatar_pos.y = -1;
 	data->facing_angle = -1;
+	data->mini_map_scale = 5 + (32/mapinfo->height + 32/mapinfo->width);
 }
 
 bool	init_program(t_data *data, t_mapinfo *mapinfo)
 {
-	printf("init_program\n");
 	init_data(data, mapinfo);
-	printf("init_data\n");
 	data->mlx.mlx = mlx_init();
-	printf("mlx_init\n");
 	if (data->mlx.mlx == NULL)
 		return (FALSE);
-	printf("mlx_init2\n");
 	data->mlx.mlx_win = mlx_new_window(data->mlx.mlx, WIDTH, HEIGHT, "cub3D");
 	if (data->mlx.mlx_win == NULL)
 		return (FALSE);
-	printf("mlx_new_window\n");
 	if (!(init_img(data, &data->ray_to_draw, WIDTH, HEIGHT)))
 		return (FALSE);
-	printf("init_img\n");
 	if (!(assign_data(data, mapinfo)))
 		return(err_msg("", "Failed to assign data", 0), 0);
 	mlx_hook(data->mlx.mlx_win, 17, 0, kill_program, data);
@@ -103,7 +96,7 @@ int main(int ac, char **av)
 	ft_bzero(&data, sizeof(t_data));
 	ft_bzero(&mapinfo, sizeof(t_mapinfo));
 	if (validate_cub(ac, av, &mapinfo) != SUCCESS)
-		return (0);
+		exit (1);
 	if (!(init_program(&data, &mapinfo)))
 		return(err_msg("" ,"Failed to initialize program", 0), 0);
 	mlx_hook(data.mlx.mlx_win, 2, 1L << 0, key_press, &data);
