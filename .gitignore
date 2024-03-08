@@ -52,3 +52,7 @@ Mkfile.old
 dkms.conf
 
 .vscode
+
+# MLX git
+# mlx_linux/.github
+# mlx_linux/.gitignore

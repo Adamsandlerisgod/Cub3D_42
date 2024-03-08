@@ -35,19 +35,20 @@
 // // 	draw_grid_vertical(img, width);
 // // }
 
-void fill_square(t_img *img, int color, int i, int j) 
+void fill_square(t_data *data, int color, int i, int j) 
 {
     int k;
     int l;
 
     k = 0;
     l = 0;
-    while(k < 10)
+    while(k < data->mini_map_scale)
      {
         l = 0;
-        while(l < 10)
+        while(l < data->mini_map_scale)
         {
-            img_draw_pixel(img, (i * 10) + k, (j * 10) + l, color);
+            img_draw_pixel(&data->ray_to_draw, (i * data->mini_map_scale) + k,
+                (j * data->mini_map_scale) + l, color);
             l++;
         }
         k++;
@@ -59,8 +60,8 @@ int draw_mini_map(t_data *data) {
     int color;
     int x;
     int y;
-    x = 0;
 
+    x = 0;
     while (data->map[x] != NULL) { // Loop through each row in the map
         y = 0;
         while (data->map[x][y] != '\0') { // Loop through each column in the current row
@@ -69,12 +70,12 @@ int draw_mini_map(t_data *data) {
             } else {
                 color = 0x0000FF; // Blue color for empty space
             }
-            fill_square(&data->ray_to_draw, color, y, x);
+            fill_square(data, color, y, x);
             y++;
         }
         x++;
     }
-    fill_square(&data->ray_to_draw, 0x00FF00, (int)data->avatar_pos.x , (int)data->avatar_pos.y);
+    fill_square(data, 0x00FF00, (int)data->avatar_pos.x , (int)data->avatar_pos.y);
     return (0);
 }
 

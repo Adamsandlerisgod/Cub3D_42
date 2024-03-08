@@ -16,6 +16,7 @@
 # include "../mlx_linux/mlx.h"
 # include <math.h>
 # include <fcntl.h>
+# include <unistd.h>
 # include <stdio.h>
 # include <string.h>
 # include <errno.h>
@@ -43,9 +44,10 @@
 # define WIDTH 1024
 /*Half (FOV) angle*/
 # define FOV 0.4235987756
+// # define FOV 0.78539816339
 
 /* movement speed */
-# define SPEED 0.1
+# define SPEED 0.4
 
 # define SUCCESS 0
 # define FAILURE 1
@@ -169,6 +171,7 @@ typedef struct s_data
 	char		**map;
 	t_img		ray_to_draw;
 	t_keypress	key;
+	float		mini_map_scale;
 }		t_data;
 
 /********PARSING*********/
