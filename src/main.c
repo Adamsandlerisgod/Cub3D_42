@@ -86,6 +86,7 @@ int main_loop(t_data *data)
 	move_avatar(data);	
 	img_draw_background(data);
 	draw_ray(data);
+	draw_mini_map(data);
 	mlx_clear_window(data->mlx.mlx, data->mlx.mlx_win);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.mlx_win,
 		 data->ray_to_draw.img, 0, 0);

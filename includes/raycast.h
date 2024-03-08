@@ -221,6 +221,7 @@ int	kill_program(t_data *data);
 void	move_avatar(t_data *data);
 int 	draw_ray(t_data *data);
 void 	img_draw_background(t_data *data);
+int draw_mini_map(t_data *data);
 int		get_pixel_color(t_img *img, int x, int y);
 void	img_draw_pixel(t_img *img, int x, int y, unsigned int color);
 void	ray_cast(t_data *data, t_ray *rays, int x);
